@@ -1,0 +1,61 @@
+.papers{
+
+    padding:80px;
+
+}
+
+.papers h2{
+
+    color:#003366;
+
+    margin-bottom:40px;
+
+}
+
+.paper-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:30px;
+
+}
+
+.paper-card{
+
+    background:white;
+
+    border-radius:10px;
+
+    box-shadow:0 5px 15px rgba(0,0,0,.1);
+
+    overflow:hidden;
+
+}
+
+.paper-image{
+
+    height:180px;
+
+    background:#d5e8ff;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+.paper-card h3{
+
+    padding:20px;
+
+}
+
+.paper-card p{
+
+    padding:0 20px 20px;
+
+}
