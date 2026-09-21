@@ -1,0 +1,53 @@
+.investigator-section{
+
+    padding-bottom:100px;
+
+}
+
+.investigator-filters{
+
+    display:flex;
+
+    gap:20px;
+
+    margin-bottom:50px;
+
+}
+
+.investigator-filters input{
+
+    flex:1;
+
+    padding:15px 20px;
+
+    border-radius:12px;
+
+    border:1px solid var(--border);
+
+    font-size:15px;
+
+}
+
+.investigator-filters select{
+
+    width:280px;
+
+    padding:15px;
+
+    border-radius:12px;
+
+    border:1px solid var(--border);
+
+    font-size:15px;
+
+}
+
+.investigator-list{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:25px;
+
+}

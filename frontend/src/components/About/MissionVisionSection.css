@@ -1,0 +1,77 @@
+.mission-section{
+
+    padding:100px 0;
+
+    background:#f8fafc;
+
+}
+
+.mission-header{
+
+    text-align:center;
+
+    margin-bottom:60px;
+
+}
+
+.mission-header h2{
+
+    font-size:42px;
+
+    color:#1e293b;
+
+    margin-bottom:20px;
+
+}
+
+.mission-header p{
+
+    max-width:700px;
+
+    margin:auto;
+
+    color:#64748b;
+
+    line-height:1.8;
+
+}
+
+.mission-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:40px;
+
+}
+
+.mission-card{
+
+    padding:45px;
+
+}
+
+.mission-icon{
+
+    font-size:50px;
+
+    margin-bottom:25px;
+
+}
+
+.mission-card h3{
+
+    margin-bottom:20px;
+
+    color:#1e293b;
+
+}
+
+.mission-card p{
+
+    color:#64748b;
+
+    line-height:1.8;
+
+}

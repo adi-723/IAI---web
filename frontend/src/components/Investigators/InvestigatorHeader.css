@@ -1,0 +1,31 @@
+.investigator-header{
+
+    padding:90px 0 50px;
+
+    text-align:center;
+
+}
+
+.investigator-header h1{
+
+    font-size:52px;
+
+    margin-bottom:20px;
+
+    color:var(--text);
+
+}
+
+.investigator-header p{
+
+    max-width:720px;
+
+    margin:auto;
+
+    color:var(--text-light);
+
+    line-height:1.8;
+
+    font-size:18px;
+
+}

@@ -1,28 +1,120 @@
-import  "./Hero.css";
+import "./Hero.css";
 
-function Hero(){
+import { useEffect, useState } from "react";
 
-    return(
+import { Link } from "react-router-dom";
 
-        <section className="hero">
+import Button from "../UI/Button/Button";
 
-            <h1>
+import { useLanguage } from "../../context/LanguageContext";
 
-                Instituto de Inteligencia Artificial
+const slides = [
 
-            </h1>
+    "/images/hero/hero1.png",
 
-            <p>
+    "/images/hero/hero2.png",
 
-                Investigación, Innovación y Desarrollo Científico
+    "/images/hero/hero3.png",
 
-            </p>
+    "/images/hero/hero4.png"
 
-            <button>
+];
 
-                Conocer más
+function Hero() {
 
-            </button>
+    const { t } = useLanguage();
+
+    const [current, setCurrent] = useState(0);
+
+    useEffect(() => {
+
+        const interval = setInterval(() => {
+
+            setCurrent((prev) => (prev + 1) % slides.length);
+
+        }, 5000);
+
+        return () => clearInterval(interval);
+
+    }, []);
+
+    return (
+
+        <section
+
+            className="hero"
+
+            style={{
+
+                backgroundImage: `url(${slides[current]})`
+
+            }}
+
+        >
+
+            <div className="hero-overlay">
+
+                <div className="hero-content">
+
+                    <span>
+
+                        {t.hero.badge}
+
+                    </span>
+
+                    <h1>
+
+                        {t.hero.title}
+
+                    </h1>
+
+                    <p>
+
+                        {t.hero.description}
+
+                    </p>
+
+                    <Link to="/investigaciones">
+
+                        <Button>
+
+                            {t.hero.button}
+
+                        </Button>
+
+                    </Link>
+
+                    <div className="hero-indicators">
+
+                        {
+
+                            slides.map((_, index) => (
+
+                                <span
+
+                                    key={index}
+
+                                    className={
+
+                                        index === current
+
+                                            ? "active"
+
+                                            : ""
+
+                                    }
+
+                                />
+
+                            ))
+
+                        }
+
+                    </div>
+
+                </div>
+
+            </div>
 
         </section>
 

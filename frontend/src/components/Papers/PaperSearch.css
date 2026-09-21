@@ -1,0 +1,25 @@
+.paper-search{
+
+    margin:50px 0;
+
+    display:flex;
+
+    justify-content:center;
+
+}
+
+.paper-search input{
+
+    width:700px;
+
+    max-width:100%;
+
+    padding:18px 24px;
+
+    border-radius:14px;
+
+    border:1px solid var(--border);
+
+    font-size:16px;
+
+}

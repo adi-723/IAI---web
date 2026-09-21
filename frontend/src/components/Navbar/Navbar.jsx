@@ -1,79 +1,135 @@
 import { Link } from "react-router-dom";
+
+import Container from "../UI/Container/Container";
+import LanguageSwitcher from "../UI/LanguageSwitcher/LanguageSwitcher";
+
+import { useLanguage } from "../../context/LanguageContext";
+
 import "./Navbar.css";
 
 function Navbar() {
 
+    const { t } = useLanguage();
+
     return (
 
-        <nav className="navbar">
+        <header className="navbar">
 
-            <div className="logo">
+            <Container>
 
-                IAI
+                <div className="navbar-content">
 
-            </div>
+                    <div className="logo">
 
-            <ul>
+                        <Link to="/">
 
-                <li>
+                            <span className="logo-circle">
 
-                    <Link to="/">Inicio</Link>
+                                IAI
 
-                </li>
+                            </span>
 
-                <li>
+                            <span>
 
-                    <Link to="/investigadores">
+                                Instituto IAI
 
-                        Investigadores
+                            </span>
 
-                    </Link>
+                        </Link>
 
-                </li>
+                    </div>
 
-                <li>
+                    <nav>
 
-                    <Link to="/papers">
+                        <ul>
 
-                        Papers
+                            <li>
 
-                    </Link>
+                                <Link to="/">
 
-                </li>
+                                    {t.navbar.home}
 
-                <li>
+                                </Link>
 
-                    <Link to="/proyectos">
+                            </li>
 
-                        Proyectos
+                            <li>
 
-                    </Link>
+                                <Link to="/investigaciones">
 
-                </li>
+                                    {t.navbar.research}
 
-                <li>
+                                </Link>
 
-                    <Link to="/noticias">
+                            </li>
 
-                        Noticias
+                            <li>
 
-                    </Link>
+                                <Link to="/papers">
 
-                </li>
+                                    {t.navbar.papers}
 
-                <li>
+                                </Link>
 
-                    <Link to="/contacto">
+                            </li>
 
-                        Contacto
+                            <li>
 
-                    </Link>
+                                <Link to="/investigadores">
 
-                </li>
+                                    {t.navbar.investigators}
 
-            </ul>
+                                </Link>
 
-        </nav>
+                            </li>
+
+                            <li>
+
+                                <Link to="/noticias">
+
+                                    {t.navbar.news}
+
+                                </Link>
+
+                            </li>
+
+                            <li>
+
+                                <Link to="/contacto">
+
+                                    {t.navbar.contact}
+
+                                </Link>
+
+                            </li>
+
+                            <li>
+                                <Link to="/login">
+                                    {t.navbar.login}
+                                </Link>
+                            </li>
+
+                            <li>
+                                <Link to="/admin">
+                                    Admin
+                                </Link>
+                            </li>
+
+                        </ul>
+
+                    </nav>
+
+                    <div className="navbar-actions">
+
+                        <LanguageSwitcher />
+
+                    </div>
+
+                </div>
+
+            </Container>
+
+        </header>
 
     );
 

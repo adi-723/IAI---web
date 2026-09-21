@@ -1,23 +1,22 @@
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
+import Layout from "../components/Layout";
 
-function Papers(){
+import PaperHeader from "../components/Papers/PaperHeader";
+import PaperSearch from "../components/Papers/PaperSearch";
+import PaperSection from "../components/Papers/PaperSection";
 
-    return(
+function Papers() {
 
-        <>
+    return (
 
-            <Navbar/>
+        <Layout>
 
-            <main>
+            <PaperHeader />
 
-                <h2>Papers</h2>
+            <PaperSearch />
 
-            </main>
+            <PaperSection />
 
-            <Footer/>
-
-        </>
+        </Layout>
 
     );
 

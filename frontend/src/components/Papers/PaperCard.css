@@ -1,0 +1,59 @@
+.paper-card{
+
+    padding:0;
+
+    overflow:hidden;
+
+}
+
+.paper-image{
+
+    width:100%;
+
+    height:220px;
+
+    background:linear-gradient(
+        135deg,
+        #2563EB,
+        #60A5FA
+    );
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    color:white;
+
+    font-size:24px;
+
+    font-weight:600;
+
+}
+
+.paper-content{
+
+    padding:24px;
+
+}
+
+.paper-content h3{
+
+    font-size:22px;
+
+    margin-bottom:16px;
+
+    line-height:1.4;
+
+}
+
+.paper-content p{
+
+    color:var(--text-light);
+
+    line-height:1.7;
+
+    margin-bottom:24px;
+
+}

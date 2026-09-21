@@ -1,0 +1,141 @@
+.image-carousel{
+
+    position:relative;
+
+    width:100%;
+
+    overflow:hidden;
+
+    border-radius:24px;
+
+    box-shadow:0 15px 40px rgba(0,0,0,.15);
+
+}
+
+.carousel-image{
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:cover;
+
+    display:block;
+
+    animation:fade .8s;
+
+}
+
+@keyframes fade{
+
+    from{
+
+        opacity:.2;
+
+        transform:scale(1.02);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:scale(1);
+
+    }
+
+}
+
+.carousel-button{
+
+    position:absolute;
+
+    top:50%;
+
+    transform:translateY(-50%);
+
+    width:48px;
+
+    height:48px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.85);
+
+    cursor:pointer;
+
+    font-size:22px;
+
+    transition:.25s;
+
+}
+
+.carousel-button:hover{
+
+    background:white;
+
+    transform:translateY(-50%) scale(1.08);
+
+}
+
+.left{
+
+    left:20px;
+
+}
+
+.right{
+
+    right:20px;
+
+}
+
+.carousel-dots{
+
+    position:absolute;
+
+    bottom:20px;
+
+    width:100%;
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:10px;
+
+}
+
+.carousel-dots span{
+
+    width:12px;
+
+    height:12px;
+
+    border-radius:50%;
+
+    background:white;
+
+    opacity:.5;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+.carousel-dots span:hover{
+
+    transform:scale(1.2);
+
+}
+
+.carousel-dots .active{
+
+    opacity:1;
+
+    transform:scale(1.3);
+
+}

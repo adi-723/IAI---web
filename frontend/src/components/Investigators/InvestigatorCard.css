@@ -1,0 +1,48 @@
+.investigator-card {
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+}
+
+.investigator-photo {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: #eef4ff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.investigator-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.investigator-info {
+    flex: 1;
+}
+
+.investigator-info h3 {
+    margin-bottom: 8px;
+}
+
+.investigator-info span {
+    color: #2563eb;
+    font-weight: 600;
+}
+
+.investigator-info h4 {
+    margin: 15px 0;
+    color: #555;
+}
+
+.investigator-info p {
+    line-height: 1.7;
+    color: #666;
+    margin-bottom: 20px;
+}

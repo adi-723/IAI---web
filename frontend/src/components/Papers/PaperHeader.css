@@ -1,0 +1,29 @@
+.paper-header-page{
+
+    padding:90px 0 50px;
+
+    text-align:center;
+
+}
+
+.paper-header-page h1{
+
+    font-size:52px;
+
+    margin-bottom:20px;
+
+}
+
+.paper-header-page p{
+
+    max-width:700px;
+
+    margin:auto;
+
+    color:var(--text-light);
+
+    font-size:20px;
+
+    line-height:1.8;
+
+}

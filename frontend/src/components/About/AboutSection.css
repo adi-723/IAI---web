@@ -1,0 +1,58 @@
+.about-section{
+
+    padding:100px 0;
+
+    background:#ffffff;
+
+}
+
+.about-content{
+
+    max-width:1100px;
+
+    margin:auto;
+
+}
+
+.section-tag{
+
+    display:inline-block;
+
+    padding:8px 18px;
+
+    border-radius:20px;
+
+    background:#eef5ff;
+
+    color:#2563eb;
+
+    font-weight:600;
+
+    margin-bottom:20px;
+
+}
+
+.about-text h2{
+
+    font-size:42px;
+
+    color:#1e293b;
+
+    margin-bottom:25px;
+
+    line-height:1.2;
+
+}
+
+.about-text p{
+
+    font-size:18px;
+
+    color:#64748b;
+
+    line-height:1.8;
+
+    margin-bottom:20px;
+
+}
+
