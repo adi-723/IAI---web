@@ -1,4 +1,5 @@
 import Layout from "../components/Layout";
+import NewsSection from "../components/News/NewsSection";
 
 function News() {
 
@@ -6,11 +7,7 @@ function News() {
 
         <Layout>
 
-            <h1>Noticias</h1>
-
-            <p>
-                Noticias del instituto.
-            </p>
+            <NewsSection />
 
         </Layout>
 

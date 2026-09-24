@@ -8,7 +8,11 @@ const LanguageContext = createContext();
 
 export function LanguageProvider({ children }) {
 
-    const [language, setLanguage] = useState("es");
+    const [language, setLanguage] = useState(() => {
+
+        return localStorage.getItem("language") || "es";
+
+    });
 
     const translations = {
 
@@ -18,11 +22,19 @@ export function LanguageProvider({ children }) {
 
     };
 
+    function cambiarIdioma(nuevoIdioma) {
+
+        setLanguage(nuevoIdioma);
+
+        localStorage.setItem("language", nuevoIdioma);
+
+    }
+
     const value = {
 
         language,
 
-        setLanguage,
+        setLanguage: cambiarIdioma,
 
         t: translations[language]
 
