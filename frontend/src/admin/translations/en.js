@@ -88,11 +88,77 @@ const en = {
         date: "Date",
         status: "Status",
         actions: "Actions",
-
         published: "Published",
         scheduled: "Scheduled",
         edit: "Edit",
-        delete: "Delete"
+        delete: "Delete",
+
+        newNews: "New article",
+        editNews: "Edit article",
+        currentLanguageDescription: "Write the news article in the current language.",
+
+        generalInformation: "General information",
+
+        image: "Image",
+        searchImage: "Browse image",
+        imageHelp: "You can enter a path manually or select an image from your PC.",
+
+        publishDate: "Publication date",
+
+        content: "Content",
+
+        currentLanguage: "Current language",
+        otherLanguageNotice: "The version in the other language will be generated automatically.",
+
+        titleField: "Title",
+        summary: "Summary",
+        contentField: "Content",
+
+        cancel: "Cancel",
+        saveNews: "Save article",
+
+        uploadingImage: "Uploading image...",
+
+        noNews: "No news articles registered.",
+        editComingSoon: "Editing will be implemented later.",
+
+        confirmDelete: "Are you sure you want to delete this article?",
+
+        loading: "Loading news...",
+
+        loadError: "The news could not be loaded.",
+
+        invalidImage: "Please select an image file.",
+
+        uploadError: "The image could not be uploaded.",
+
+        requiredTitle: "You must enter a title.",
+
+        requiredSummary: "You must enter a summary.",
+
+        requiredContent: "You must enter the content.",
+
+        requiredDate: "You must select a date.",
+
+        createError: "The news article could not be created.",
+
+        createdSuccess: "News article created successfully.",
+
+        confirmDelete: "Are you sure you want to delete this news article?",
+
+        deleteError: "The news article could not be deleted.",
+
+        deletedSuccess: "News article deleted successfully.",
+
+        noDate: "No date",
+
+        published: "Published",
+
+        scheduled: "Scheduled",
+
+        fileSelected: "Selected file:",
+
+        otherLanguageNotice: "The version in the other language will be generated automatically."
     },
 
     research: {

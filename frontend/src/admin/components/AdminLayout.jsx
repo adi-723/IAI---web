@@ -1,10 +1,6 @@
 import Sidebar from "./Sidebar";
 import Topbar from "./Topbar";
-
 import "../styles/AdminLayout.css";
-import "../styles/Sidebar.css";
-import "../styles/Topbar.css";
-import "../styles/AdminPages.css";
 
 function AdminLayout({ children }) {
     return (

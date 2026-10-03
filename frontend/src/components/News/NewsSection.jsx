@@ -1,74 +1,136 @@
 import { useEffect, useState } from "react";
+
 import "./NewsSection.css";
+
+import { useLanguage } from "../../context/LanguageContext";
+
+import newsES from "../../translations/es/news";
+import newsEN from "../../translations/en/news";
+
 
 function NewsSection() {
 
-    // Aquí guardaremos las noticias que vienen del backend
+    // ------------------------------------------------
+    // IDIOMA
+    // ------------------------------------------------
+
+    const { language } = useLanguage();
+
+
+    // Seleccionamos las traducciones correspondientes
+
+    const t =
+        language === "es"
+            ? newsES
+            : newsEN;
+
+
+    // ------------------------------------------------
+    // ESTADOS
+    // ------------------------------------------------
+
     const [news, setNews] = useState([]);
 
-    // Indica si todavía estamos cargando las noticias
     const [loading, setLoading] = useState(true);
 
-    // Guarda un posible mensaje de error
     const [error, setError] = useState(null);
 
 
-    // Se ejecuta cuando el componente aparece
+    // ------------------------------------------------
+    // TEXTOS QUE TODAVÍA NO ESTÁN
+    // EN LOS ARCHIVOS DE TRADUCCIÓN
+    // ------------------------------------------------
+
+    const messages = {
+
+        es: {
+            loading: "Cargando noticias...",
+            loadError: "No se pudieron cargar las noticias.",
+            noNews: "No hay noticias disponibles."
+        },
+
+        en: {
+            loading: "Loading news...",
+            loadError: "The news could not be loaded.",
+            noNews: "No news available."
+        }
+
+    };
+
+
+    const message = messages[language];
+
+
+    // ------------------------------------------------
+    // OBTENER NOTICIAS
+    // ------------------------------------------------
+
     useEffect(() => {
 
-        fetch("http://localhost:5000/api/news/getAll.php")
+        setLoading(true);
+
+        setError(null);
+
+
+        fetch(
+            `http://localhost:5000/api/news/getAll.php?language=${language}`
+        )
 
             .then((response) => {
 
-                // Si el servidor respondió con un error
                 if (!response.ok) {
 
                     throw new Error(
-                        "No se pudieron obtener las noticias."
+                        message.loadError
                     );
 
                 }
 
-                // Convertimos la respuesta a JSON
                 return response.json();
 
             })
 
             .then((data) => {
 
-                // Guardamos las noticias
                 setNews(data);
 
             })
 
             .catch((error) => {
 
-                // Guardamos el error
-                setError(error.message);
+                console.error(error);
+
+                setError(
+                    message.loadError
+                );
 
             })
 
             .finally(() => {
 
-                // Terminó la petición
                 setLoading(false);
 
             });
 
-    }, []);
+    }, [language]);
 
 
-    // Mientras se cargan las noticias
+    // ------------------------------------------------
+    // CARGANDO
+    // ------------------------------------------------
+
     if (loading) {
 
         return (
 
             <section className="news">
 
-                <h2>Noticias</h2>
+                <h2>
+                    {t.title}
+                </h2>
 
                 <p>
-                    Cargando noticias...
+                    {message.loading}
                 </p>
 
             </section>
@@ -78,14 +140,19 @@ function NewsSection() {
     }
 
 
-    // Si ocurrió un error
+    // ------------------------------------------------
+    // ERROR
+    // ------------------------------------------------
+
     if (error) {
 
         return (
 
             <section className="news">
 
-                <h2>Noticias</h2>
+                <h2>
+                    {t.title}
+                </h2>
 
                 <p>
                     {error}
@@ -98,19 +165,28 @@ function NewsSection() {
     }
 
 
+    // ------------------------------------------------
+    // NOTICIAS
+    // ------------------------------------------------
+
     return (
 
         <section className="news">
 
             <h2>
-                Noticias
+                {t.title}
             </h2>
+
+
+            <p>
+                {t.subtitle}
+            </p>
 
 
             {news.length === 0 ? (
 
                 <p>
-                    No hay noticias disponibles.
+                    {message.noNews}
                 </p>
 
             ) : (
@@ -129,19 +205,27 @@ function NewsSection() {
                                 alt={item.title}
                             />
 
+
                             <div className="news-card-content">
 
                                 <p className="news-date">
                                     {item.publish_date}
                                 </p>
 
+
                                 <h3>
                                     {item.title}
                                 </h3>
 
+
                                 <p>
                                     {item.summary}
                                 </p>
+
+
+                                <button>
+                                    {t.button}
+                                </button>
 
                             </div>
 
@@ -158,5 +242,6 @@ function NewsSection() {
     );
 
 }
+
 
 export default NewsSection;

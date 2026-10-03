@@ -1,17 +1,20 @@
 import AdminLayout from "../components/AdminLayout";
+import { useAdminLanguage } from "../context/AdminLanguageContext";
 
 function Users() {
+    const { t } = useAdminLanguage();
+
     return (
         <AdminLayout>
             <div className="admin-page">
                 <div className="admin-page-header">
                     <div>
-                        <h1>Usuarios</h1>
-                        <p>Gestiona las cuentas con acceso administrativo.</p>
+                        <h1>{t.users.title}</h1>
+                        <p>{t.users.description}</p>
                     </div>
 
                     <button className="admin-primary-button">
-                        + Agregar usuario
+                        + {t.users.add}
                     </button>
                 </div>
 
@@ -19,11 +22,11 @@ function Users() {
                     <table className="admin-table">
                         <thead>
                             <tr>
-                                <th>Nombre</th>
-                                <th>Correo</th>
-                                <th>Rol</th>
-                                <th>Estado</th>
-                                <th>Acciones</th>
+                                <th>{t.users.name}</th>
+                                <th>{t.users.email}</th>
+                                <th>{t.users.role}</th>
+                                <th>{t.users.status}</th>
+                                <th>{t.users.actions}</th>
                             </tr>
                         </thead>
 
@@ -31,15 +34,25 @@ function Users() {
                             <tr>
                                 <td>Administrador</td>
                                 <td>admin@iai.cl</td>
-                                <td>Administrador</td>
+
+                                <td>
+                                    {t.users.administrator}
+                                </td>
+
                                 <td>
                                     <span className="status-active">
-                                        Activo
+                                        {t.users.active}
                                     </span>
                                 </td>
+
                                 <td>
-                                    <button>Editar</button>
-                                    <button>Eliminar</button>
+                                    <button>
+                                        {t.users.edit}
+                                    </button>
+
+                                    <button>
+                                        {t.users.delete}
+                                    </button>
                                 </td>
                             </tr>
                         </tbody>

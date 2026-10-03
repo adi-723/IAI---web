@@ -84,15 +84,83 @@ const es = {
         description: "Gestiona las noticias y novedades del Instituto.",
         add: "Agregar noticia",
 
+        // Tabla
         titleColumn: "Título",
         date: "Fecha",
         status: "Estado",
         actions: "Acciones",
-
         published: "Publicada",
         scheduled: "Programada",
         edit: "Editar",
-        delete: "Eliminar"
+        delete: "Eliminar",
+
+        // Modal
+        newNews: "Nueva noticia",
+        editNews: "Editar noticia",
+        currentLanguageDescription: "Escribe la noticia en el idioma actual.",
+
+        generalInformation: "Información general",
+
+        image: "Imagen",
+        searchImage: "Buscar imagen",
+        imageHelp: "Puedes escribir una ruta manualmente o seleccionar una imagen desde tu PC.",
+
+        publishDate: "Fecha de publicación",
+
+        content: "Contenido",
+
+        currentLanguage: "Idioma actual",
+        otherLanguageNotice: "La versión en el otro idioma será generada automáticamente.",
+
+        title: "Título",
+        summary: "Resumen",
+        contentField: "Contenido",
+
+        cancel: "Cancelar",
+        saveNews: "Guardar noticia",
+
+        uploadingImage: "Subiendo imagen...",
+
+        noNews: "No hay noticias registradas.",
+        editComingSoon: "La edición la implementaremos después.",
+
+        confirmDelete: "¿Estás seguro de que deseas eliminar esta noticia?",
+
+        loading: "Cargando noticias...",
+
+        loadError: "No se pudieron cargar las noticias.",
+
+        invalidImage: "Por favor selecciona un archivo de imagen.",
+
+        uploadError: "No se pudo subir la imagen.",
+
+        requiredTitle: "Debes ingresar un título.",
+
+        requiredSummary: "Debes ingresar un resumen.",
+
+        requiredContent: "Debes ingresar el contenido.",
+
+        requiredDate: "Debes seleccionar una fecha.",
+
+        createError: "No se pudo crear la noticia.",
+
+        createdSuccess: "Noticia creada correctamente.",
+
+        confirmDelete: "¿Estás seguro de que quieres eliminar esta noticia?",
+
+        deleteError: "No se pudo eliminar la noticia.",
+
+        deletedSuccess: "Noticia eliminada correctamente.",
+
+        noDate: "Sin fecha",
+
+        published: "Publicada",
+
+        scheduled: "Programada",
+
+        fileSelected: "Archivo seleccionado:",
+
+        otherLanguageNotice: "La versión en el otro idioma será generada automáticamente."
     },
 
     research: {

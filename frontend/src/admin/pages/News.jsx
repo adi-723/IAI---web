@@ -1,12 +1,25 @@
 import { useEffect, useState } from "react";
+
 import AdminLayout from "../components/AdminLayout";
+
 import { useLanguage } from "../../context/LanguageContext";
+
+import es from "../translations/es";
+import en from "../translations/en";
+
+import "../styles/AdminPages.css";
 
 const API_URL = "http://localhost:5000/api/news";
 
 function News() {
 
+    // ------------------------------------------------
+    // IDIOMA
+    // ------------------------------------------------
+
     const { language } = useLanguage();
+
+    const t = language === "es" ? es : en;
 
 
     // ------------------------------------------------
@@ -64,24 +77,27 @@ function News() {
                 `${API_URL}/getAll.php?language=${language}`
             );
 
+
             if (!response.ok) {
 
                 throw new Error(
-                    "No se pudieron obtener las noticias."
+                    t.news.loadError
                 );
 
             }
 
+
             const data = await response.json();
 
             setNews(data);
+
 
         } catch (error) {
 
             console.error(error);
 
             setError(
-                "No se pudieron cargar las noticias."
+                t.news.loadError
             );
 
         } finally {
@@ -120,8 +136,11 @@ function News() {
 
         const file = event.target.files[0];
 
+
         if (!file) {
+
             return;
+
         }
 
 
@@ -130,7 +149,7 @@ function News() {
         if (!file.type.startsWith("image/")) {
 
             alert(
-                "Por favor selecciona un archivo de imagen."
+                t.news.invalidImage
             );
 
             event.target.value = "";
@@ -164,14 +183,23 @@ function News() {
             );
 
 
-            const data = await response.json();
+            let data = {};
+
+            try {
+
+                data = await response.json();
+
+            } catch {
+
+                data = {};
+
+            }
 
 
             if (!response.ok) {
 
                 throw new Error(
-                    data.message ||
-                    "No se pudo subir la imagen."
+                    t.news.uploadError
                 );
 
             }
@@ -193,7 +221,9 @@ function News() {
 
             console.error(error);
 
-            alert(error.message);
+            alert(
+                t.news.uploadError
+            );
 
             setImageFile(null);
 
@@ -215,32 +245,38 @@ function News() {
         event.preventDefault();
 
 
+        // Validar título
+
         if (!formData.title.trim()) {
 
             alert(
-                "Debes ingresar un título."
+                t.news.requiredTitle
             );
 
             return;
 
         }
 
+
+        // Validar resumen
 
         if (!formData.summary.trim()) {
 
             alert(
-                "Debes ingresar un resumen."
+                t.news.requiredSummary
             );
 
             return;
 
         }
 
+
+        // Validar contenido
 
         if (!formData.content.trim()) {
 
             alert(
-                "Debes ingresar el contenido."
+                t.news.requiredContent
             );
 
             return;
@@ -248,10 +284,12 @@ function News() {
         }
 
 
+        // Validar fecha
+
         if (!formData.publish_date) {
 
             alert(
-                "Debes seleccionar una fecha."
+                t.news.requiredDate
             );
 
             return;
@@ -286,25 +324,35 @@ function News() {
                         content: formData.content
 
                     })
+
                 }
             );
 
 
-            const data = await response.json();
+            let data = {};
+
+            try {
+
+                data = await response.json();
+
+            } catch {
+
+                data = {};
+
+            }
 
 
             if (!response.ok) {
 
                 throw new Error(
-                    data.message ||
-                    "No se pudo crear la noticia."
+                    t.news.createError
                 );
 
             }
 
 
             alert(
-                "Noticia creada correctamente."
+                t.news.createdSuccess
             );
 
 
@@ -319,7 +367,9 @@ function News() {
 
             console.error(error);
 
-            alert(error.message);
+            alert(
+                t.news.createError
+            );
 
         }
 
@@ -346,6 +396,7 @@ function News() {
 
         });
 
+
         setImageFile(null);
 
     }
@@ -358,12 +409,14 @@ function News() {
     async function eliminarNoticia(id) {
 
         const confirmar = window.confirm(
-            "¿Estás seguro de que quieres eliminar esta noticia?"
+            t.news.confirmDelete
         );
 
 
         if (!confirmar) {
+
             return;
+
         }
 
 
@@ -377,21 +430,30 @@ function News() {
             );
 
 
-            const data = await response.json();
+            let data = {};
+
+            try {
+
+                data = await response.json();
+
+            } catch {
+
+                data = {};
+
+            }
 
 
             if (!response.ok) {
 
                 throw new Error(
-                    data.message ||
-                    "No se pudo eliminar la noticia."
+                    t.news.deleteError
                 );
 
             }
 
 
             alert(
-                "Noticia eliminada correctamente."
+                t.news.deletedSuccess
             );
 
 
@@ -402,7 +464,9 @@ function News() {
 
             console.error(error);
 
-            alert(error.message);
+            alert(
+                t.news.deleteError
+            );
 
         }
 
@@ -416,7 +480,9 @@ function News() {
     function formatearFecha(fecha) {
 
         if (!fecha) {
+
             return "-";
+
         }
 
 
@@ -424,7 +490,9 @@ function News() {
 
 
         if (partes.length !== 3) {
+
             return fecha;
+
         }
 
 
@@ -440,7 +508,9 @@ function News() {
     function obtenerEstado(fecha) {
 
         if (!fecha) {
-            return "Sin fecha";
+
+            return t.news.noDate;
+
         }
 
 
@@ -455,12 +525,12 @@ function News() {
 
         if (fechaPublicacion <= hoy) {
 
-            return "Publicada";
+            return t.news.published;
 
         }
 
 
-        return "Programada";
+        return t.news.scheduled;
 
     }
 
@@ -488,6 +558,7 @@ function News() {
 
             <div className="admin-page">
 
+
                 {/* CABECERA */}
 
                 <div className="admin-page-header">
@@ -495,12 +566,11 @@ function News() {
                     <div>
 
                         <h1>
-                            Noticias
+                            {t.news.title}
                         </h1>
 
                         <p>
-                            Gestiona las noticias y novedades
-                            del Instituto.
+                            {t.news.description}
                         </p>
 
                     </div>
@@ -510,7 +580,7 @@ function News() {
                         className="admin-primary-button"
                         onClick={abrirFormulario}
                     >
-                        + Agregar noticia
+                        + {t.news.add}
                     </button>
 
                 </div>
@@ -523,7 +593,7 @@ function News() {
                     <div className="admin-table-card">
 
                         <p>
-                            Cargando noticias...
+                            {t.news.loading}
                         </p>
 
                     </div>
@@ -559,19 +629,19 @@ function News() {
                                 <tr>
 
                                     <th>
-                                        Título
+                                        {t.news.titleColumn}
                                     </th>
 
                                     <th>
-                                        Fecha
+                                        {t.news.date}
                                     </th>
 
                                     <th>
-                                        Estado
+                                        {t.news.status}
                                     </th>
 
                                     <th>
-                                        Acciones
+                                        {t.news.actions}
                                     </th>
 
                                 </tr>
@@ -587,8 +657,7 @@ function News() {
 
                                         <td colSpan="4">
 
-                                            No hay noticias
-                                            registradas.
+                                            {t.news.noNews}
 
                                         </td>
 
@@ -608,9 +677,11 @@ function News() {
 
 
                                             <td>
+
                                                 {formatearFecha(
                                                     item.publish_date
                                                 )}
+
                                             </td>
 
 
@@ -621,7 +692,7 @@ function News() {
                                                         obtenerEstado(
                                                             item.publish_date
                                                         ) ===
-                                                        "Publicada"
+                                                        t.news.published
                                                             ? "status-active"
                                                             : "status-pending"
                                                     }
@@ -644,11 +715,13 @@ function News() {
                                                     className="admin-action-button"
                                                     onClick={() =>
                                                         alert(
-                                                            "La edición la implementaremos después."
+                                                            t.news.editComingSoon
                                                         )
                                                     }
                                                 >
-                                                    Editar
+
+                                                    {t.news.edit}
+
                                                 </button>
 
 
@@ -660,7 +733,9 @@ function News() {
                                                         )
                                                     }
                                                 >
-                                                    Eliminar
+
+                                                    {t.news.delete}
+
                                                 </button>
 
                                             </td>
@@ -688,6 +763,7 @@ function News() {
 
                         <div className="news-modal">
 
+
                             {/* CABECERA DEL MODAL */}
 
                             <div className="news-modal-header">
@@ -695,12 +771,11 @@ function News() {
                                 <div>
 
                                     <h2>
-                                        Nueva noticia
+                                        {t.news.newNews}
                                     </h2>
 
                                     <p>
-                                        Escribe la noticia
-                                        en el idioma actual.
+                                        {t.news.currentLanguageDescription}
                                     </p>
 
                                 </div>
@@ -723,19 +798,20 @@ function News() {
                                 onSubmit={handleSubmit}
                             >
 
+
                                 {/* INFORMACIÓN GENERAL */}
 
                                 <div className="news-form-section">
 
                                     <h3>
-                                        Información general
+                                        {t.news.generalInformation}
                                     </h3>
 
 
                                     {/* IMAGEN */}
 
                                     <label>
-                                        Imagen
+                                        {t.news.image}
                                     </label>
 
 
@@ -746,7 +822,7 @@ function News() {
                                             name="image"
                                             value={
                                                 uploadingImage
-                                                    ? "Subiendo imagen..."
+                                                    ? t.news.uploadingImage
                                                     : formData.image
                                             }
                                             onChange={
@@ -760,7 +836,7 @@ function News() {
                                             htmlFor="news-image"
                                             className="news-image-button"
                                         >
-                                            Buscar imagen
+                                            {t.news.searchImage}
                                         </label>
 
 
@@ -781,7 +857,7 @@ function News() {
 
                                         <p className="news-image-name">
 
-                                            Archivo seleccionado:
+                                            {t.news.fileSelected}
                                             {" "}
                                             {imageFile.name}
 
@@ -792,9 +868,7 @@ function News() {
 
                                     <p className="news-image-help">
 
-                                        Puedes escribir una ruta
-                                        manualmente o seleccionar
-                                        una imagen desde tu PC.
+                                        {t.news.imageHelp}
 
                                     </p>
 
@@ -802,7 +876,7 @@ function News() {
                                     {/* FECHA */}
 
                                     <label>
-                                        Fecha de publicación
+                                        {t.news.publishDate}
                                     </label>
 
 
@@ -826,28 +900,28 @@ function News() {
                                 <div className="news-form-section">
 
                                     <h3>
-                                        Contenido
+                                        {t.news.content}
                                     </h3>
 
 
                                     <p className="news-language-info">
 
-                                        Idioma actual:
-                                        {" "}
+                                        {t.news.currentLanguage}
+                                        {": "}
 
                                         <strong>
+
                                             {
                                                 language === "es"
                                                     ? "Español"
                                                     : "English"
                                             }
+
                                         </strong>
 
                                         <br />
 
-                                        La versión en el otro
-                                        idioma será generada
-                                        automáticamente.
+                                        {t.news.otherLanguageNotice}
 
                                     </p>
 
@@ -855,11 +929,7 @@ function News() {
                                     {/* TITULO */}
 
                                     <label>
-                                        {
-                                            language === "es"
-                                                ? "Título"
-                                                : "Title"
-                                        }
+                                        {t.news.titleField}
                                     </label>
 
 
@@ -879,11 +949,7 @@ function News() {
                                     {/* RESUMEN */}
 
                                     <label>
-                                        {
-                                            language === "es"
-                                                ? "Resumen"
-                                                : "Summary"
-                                        }
+                                        {t.news.summary}
                                     </label>
 
 
@@ -902,11 +968,7 @@ function News() {
                                     {/* CONTENIDO */}
 
                                     <label>
-                                        {
-                                            language === "es"
-                                                ? "Contenido"
-                                                : "Content"
-                                        }
+                                        {t.news.contentField}
                                     </label>
 
 
@@ -936,7 +998,7 @@ function News() {
                                             setShowForm(false)
                                         }
                                     >
-                                        Cancelar
+                                        {t.news.cancel}
                                     </button>
 
 
@@ -949,8 +1011,8 @@ function News() {
                                     >
 
                                         {uploadingImage
-                                            ? "Subiendo imagen..."
-                                            : "Guardar noticia"}
+                                            ? t.news.uploadingImage
+                                            : t.news.saveNews}
 
                                     </button>
 
