@@ -1,8 +1,18 @@
-
 import AdminLayout from "../components/AdminLayout";
 import "../styles/Dashboard.css";
 
+import { useLanguage } from "../../context/LanguageContext";
+
+import es from "../translations/es";
+import en from "../translations/en";
+
+
 function Dashboard() {
+
+    const { language } = useLanguage();
+
+    const t = language === "es" ? es : en;
+
 
     return (
 
@@ -10,23 +20,26 @@ function Dashboard() {
 
             <div className="dashboard">
 
+                {/* ENCABEZADO */}
+
                 <section className="dashboard-header">
 
                     <span className="dashboard-label">
-                        PANEL DE ADMINISTRACIÓN
+                        {t.dashboard.label}
                     </span>
 
                     <h1>
-                        Dashboard
+                        {t.dashboard.title}
                     </h1>
 
                     <p>
-                        Bienvenido al panel de administración del IAI.
-                        Desde aquí puedes gestionar el contenido del sitio.
+                        {t.dashboard.welcome}
                     </p>
 
                 </section>
 
+
+                {/* RESUMEN */}
 
                 <section className="dashboard-section">
 
@@ -35,11 +48,11 @@ function Dashboard() {
                         <div>
 
                             <h2>
-                                Resumen
+                                {t.dashboard.summary}
                             </h2>
 
                             <p>
-                                Estado actual del contenido del sitio.
+                                {t.dashboard.summaryDescription}
                             </p>
 
                         </div>
@@ -48,6 +61,8 @@ function Dashboard() {
 
 
                     <div className="stats-grid">
+
+                        {/* INVESTIGADORES */}
 
                         <div className="admin-stat-card">
 
@@ -58,23 +73,28 @@ function Dashboard() {
                                 </div>
 
                                 <span className="stat-title">
-                                    Investigadores
+                                    {t.dashboard.researchers}
                                 </span>
 
                             </div>
 
+
                             <div className="stat-content">
 
-                                <h2>0</h2>
+                                <h2>
+                                    0
+                                </h2>
 
                                 <p>
-                                    Investigadores registrados
+                                    {t.dashboard.researchersRegistered}
                                 </p>
 
                             </div>
 
                         </div>
 
+
+                        {/* PAPERS */}
 
                         <div className="admin-stat-card">
 
@@ -85,23 +105,28 @@ function Dashboard() {
                                 </div>
 
                                 <span className="stat-title">
-                                    Papers
+                                    {t.dashboard.papers}
                                 </span>
 
                             </div>
 
+
                             <div className="stat-content">
 
-                                <h2>0</h2>
+                                <h2>
+                                    0
+                                </h2>
 
                                 <p>
-                                    Publicaciones registradas
+                                    {t.dashboard.papersRegistered}
                                 </p>
 
                             </div>
 
                         </div>
 
+
+                        {/* NOTICIAS */}
 
                         <div className="admin-stat-card">
 
@@ -112,17 +137,20 @@ function Dashboard() {
                                 </div>
 
                                 <span className="stat-title">
-                                    Noticias
+                                    {t.dashboard.news}
                                 </span>
 
                             </div>
 
+
                             <div className="stat-content">
 
-                                <h2>0</h2>
+                                <h2>
+                                    0
+                                </h2>
 
                                 <p>
-                                    Noticias publicadas
+                                    {t.dashboard.newsPublished}
                                 </p>
 
                             </div>
@@ -134,6 +162,8 @@ function Dashboard() {
                 </section>
 
 
+                {/* ACCIONES RÁPIDAS */}
+
                 <section className="dashboard-section">
 
                     <div className="section-heading">
@@ -141,11 +171,11 @@ function Dashboard() {
                         <div>
 
                             <h2>
-                                Acciones rápidas
+                                {t.dashboard.quickActions}
                             </h2>
 
                             <p>
-                                Accede rápidamente a las principales funciones.
+                                {t.dashboard.quickActionsDescription}
                             </p>
 
                         </div>
@@ -155,6 +185,8 @@ function Dashboard() {
 
                     <div className="quick-actions">
 
+                        {/* AGREGAR INVESTIGADOR */}
+
                         <button className="quick-action">
 
                             <div className="quick-action-icon">
@@ -164,11 +196,11 @@ function Dashboard() {
                             <div className="quick-action-content">
 
                                 <strong>
-                                    Agregar investigador
+                                    {t.dashboard.addResearcher}
                                 </strong>
 
                                 <span>
-                                    Registrar un nuevo investigador
+                                    {t.dashboard.addResearcherDescription}
                                 </span>
 
                             </div>
@@ -180,6 +212,8 @@ function Dashboard() {
                         </button>
 
 
+                        {/* AGREGAR PAPER */}
+
                         <button className="quick-action">
 
                             <div className="quick-action-icon">
@@ -189,11 +223,11 @@ function Dashboard() {
                             <div className="quick-action-content">
 
                                 <strong>
-                                    Agregar paper
+                                    {t.dashboard.addPaper}
                                 </strong>
 
                                 <span>
-                                    Registrar una nueva publicación
+                                    {t.dashboard.addPaperDescription}
                                 </span>
 
                             </div>
@@ -205,6 +239,8 @@ function Dashboard() {
                         </button>
 
 
+                        {/* CREAR NOTICIA */}
+
                         <button className="quick-action">
 
                             <div className="quick-action-icon">
@@ -214,11 +250,11 @@ function Dashboard() {
                             <div className="quick-action-content">
 
                                 <strong>
-                                    Crear noticia
+                                    {t.dashboard.createNews}
                                 </strong>
 
                                 <span>
-                                    Publicar una nueva noticia
+                                    {t.dashboard.createNewsDescription}
                                 </span>
 
                             </div>
@@ -240,5 +276,6 @@ function Dashboard() {
     );
 
 }
+
 
 export default Dashboard;

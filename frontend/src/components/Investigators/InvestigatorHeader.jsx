@@ -2,7 +2,22 @@ import "./InvestigatorHeader.css";
 
 import Container from "../UI/Container/Container";
 
+import { useLanguage } from "../../context/LanguageContext";
+
+import investigatorsES from "../../translations/es/investigators";
+import investigatorsEN from "../../translations/en/investigators";
+
+
 function InvestigatorHeader() {
+
+    const { language } = useLanguage();
+
+
+    const t =
+        language === "es"
+            ? investigatorsES
+            : investigatorsEN;
+
 
     return (
 
@@ -11,17 +26,11 @@ function InvestigatorHeader() {
             <Container>
 
                 <h1>
-
-                    Nuestros Investigadores
-
+                    {t.title}
                 </h1>
 
                 <p>
-
-                    Conoce a los investigadores que desarrollan
-                    investigación científica en el Instituto de
-                    Inteligencia Artificial.
-
+                    {t.subtitle}
                 </p>
 
             </Container>
@@ -31,5 +40,6 @@ function InvestigatorHeader() {
     );
 
 }
+
 
 export default InvestigatorHeader;

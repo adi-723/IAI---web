@@ -1,4 +1,9 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import {
+    BrowserRouter,
+    Routes,
+    Route,
+    Outlet
+} from "react-router-dom";
 
 import Home from "./pages/Home";
 
@@ -20,6 +25,18 @@ import AdminNews from "./admin/pages/News";
 import AdminResearchGroups from "./admin/pages/ResearchGroups";
 import Users from "./admin/pages/Users";
 
+import { AdminLanguageProvider } from "./admin/context/AdminLanguageContext";
+
+
+function AdminLanguageLayout() {
+    return (
+        <AdminLanguageProvider>
+            <Outlet />
+        </AdminLanguageProvider>
+    );
+}
+
+
 function Router() {
 
     return (
@@ -28,7 +45,9 @@ function Router() {
 
             <Routes>
 
-                {/* Rutas públicas */}
+                {/* ========================= */}
+                {/* RUTAS PÚBLICAS */}
+                {/* ========================= */}
 
                 <Route
                     path="/"
@@ -75,44 +94,54 @@ function Router() {
                     element={<Contact />}
                 />
 
-                {/* Login */}
+
+                {/* ========================= */}
+                {/* LOGIN */}
+                {/* ========================= */}
 
                 <Route
                     path="/login"
                     element={<Login />}
                 />
 
-                {/* Panel administrador */}
 
-                <Route
-                    path="/admin"
-                    element={<Dashboard />}
-                />
+                {/* ========================= */}
+                {/* PANEL ADMINISTRADOR */}
+                {/* ========================= */}
 
-                <Route
-                    path="/admin/investigators"
-                    element={<AdminInvestigators />}
-                />
+                <Route element={<AdminLanguageLayout />}>
 
-                <Route
-                    path="/admin/papers"
-                    element={<AdminPapers />}
-                />
+                    <Route
+                        path="/admin"
+                        element={<Dashboard />}
+                    />
 
-                <Route
-                    path="/admin/news"
-                    element={<AdminNews />}
-                />
+                    <Route
+                        path="/admin/investigators"
+                        element={<AdminInvestigators />}
+                    />
 
-                <Route
-                    path="/admin/research-groups"
-                    element={<AdminResearchGroups />}
-                />
+                    <Route
+                        path="/admin/papers"
+                        element={<AdminPapers />}
+                    />
 
-                <Route
-                    path="/admin/users"
-                    element={<Users />}
-                />
+                    <Route
+                        path="/admin/news"
+                        element={<AdminNews />}
+                    />
+
+                    <Route
+                        path="/admin/research-groups"
+                        element={<AdminResearchGroups />}
+                    />
+
+                    <Route
+                        path="/admin/users"
+                        element={<Users />}
+                    />
+
+                </Route>
 
             </Routes>
 
