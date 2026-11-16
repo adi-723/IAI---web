@@ -18,7 +18,27 @@ const papers = {
 
     notFound: "Paper no encontrado.",
 
-    abstract: "Resumen"
+    abstract: "Resumen",
+
+    loading: "Cargando paper...",
+
+    loadingPapers: "Cargando papers...",
+
+    loadError: "No se pudieron cargar los papers.",
+
+    noPapers: "No hay papers disponibles.",
+
+    authors: "Autores",
+
+    journal: "Revista",
+
+    date: "Fecha",
+
+    doi: "DOI",
+
+    pdf: "PDF",
+
+    couldNotLoad: "No se pudo cargar el paper."
 
 };
 

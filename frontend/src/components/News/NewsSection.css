@@ -1,5 +1,338 @@
-.news{
 
-    padding:80px;
+.news {
+    --news-blue: #2459a9;
+    --news-blue-dark: #173f7a;
+    --news-text: #17263d;
+    --news-muted: #60738d;
+    --news-background: #f4f8fd;
 
+    padding: 64px 24px 80px;
+    background: var(--news-background);
+    min-height: 60vh;
+}
+
+.news,
+.news * {
+    box-sizing: border-box;
+}
+
+.news-container {
+    width: 100%;
+    max-width: 1240px;
+    margin: 0 auto;
+}
+
+/* Encabezado */
+
+.news-heading {
+    margin-bottom: 38px;
+}
+
+.news-eyebrow {
+    display: inline-block;
+    margin-bottom: 12px;
+    color: var(--news-blue);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.news-heading h2 {
+    margin: 0;
+    color: var(--news-text);
+    font-size: clamp(30px, 4vw, 42px);
+    font-weight: 750;
+    line-height: 1.2;
+    letter-spacing: -0.8px;
+}
+
+.news-subtitle {
+    max-width: 650px;
+    margin: 14px 0 0;
+    color: var(--news-muted);
+    font-size: 16px;
+    line-height: 1.8;
+}
+
+.news-heading-line {
+    width: 64px;
+    height: 4px;
+    margin-top: 22px;
+    border-radius: 5px;
+    background: var(--news-blue);
+}
+
+/* Cuadrícula de noticias */
+
+.news-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 30px;
+    align-items: stretch;
+}
+
+/* Tarjeta */
+
+.news-card {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    overflow: hidden;
+    background: #ffffff;
+    border: 1px solid #e5ebf3;
+    border-radius: 12px;
+    box-shadow: 0 5px 22px rgba(27, 56, 94, 0.06);
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        border-color 0.25s ease;
+}
+
+.news-card:hover {
+    transform: translateY(-5px);
+    border-color: #d2e0f4;
+    box-shadow: 0 14px 32px rgba(27, 56, 94, 0.12);
+}
+
+/* Imagen uniforme */
+
+.news-card-image {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    background: #e6edf6;
+}
+
+.news-card-image img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.45s ease;
+}
+
+.news-card:hover .news-card-image img {
+    transform: scale(1.045);
+}
+
+.news-image-placeholder {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #173f7a, #3477d5);
+    color: #ffffff;
+    font-size: 34px;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+/* Contenido */
+
+.news-card-content {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 23px 24px 25px;
+}
+
+.news-date {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin: 0 0 14px;
+    color: #59718f;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    line-height: 1.5;
+    text-transform: uppercase;
+}
+
+.news-date-dot {
+    flex-shrink: 0;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--news-blue);
+}
+
+.news-card-title {
+    margin: 0 0 13px;
+    color: var(--news-text);
+    font-size: 21px;
+    font-weight: 700;
+    line-height: 1.38;
+    letter-spacing: -0.25px;
+    overflow-wrap: anywhere;
+}
+
+.news-card-summary {
+    display: -webkit-box;
+    margin: 0 0 23px;
+    overflow: hidden;
+    color: var(--news-muted);
+    font-size: 14px;
+    line-height: 1.8;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+    line-clamp: 4;
+}
+
+/* Enlace Saber más */
+
+.news-read-more {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: auto;
+    padding: 11px 0 0;
+    border: 0;
+    background: transparent;
+    color: var(--news-blue);
+    font: inherit;
+    font-size: 14px;
+    font-weight: 750;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.news-read-more span {
+    display: inline-block;
+    font-size: 19px;
+    transition: transform 0.2s ease;
+}
+
+.news-read-more:hover {
+    color: var(--news-blue-dark);
+}
+
+.news-read-more:hover span {
+    transform: translateX(5px);
+}
+
+.news-read-more:focus-visible {
+    outline: 3px solid #8bb8ff;
+    outline-offset: 5px;
+    border-radius: 3px;
+}
+
+/* Cargando, error y lista vacía */
+
+.news-status {
+    display: flex;
+    min-height: 180px;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 30px;
+    border: 1px solid #e5ebf3;
+    border-radius: 12px;
+    background: #ffffff;
+    color: var(--news-muted);
+    text-align: center;
+}
+
+.news-status p {
+    margin: 0;
+    line-height: 1.7;
+}
+
+.news-status-error {
+    color: #a52d36;
+}
+
+.news-loader {
+    width: 22px;
+    height: 22px;
+    border: 3px solid #dbe6f5;
+    border-top-color: var(--news-blue);
+    border-radius: 50%;
+    animation: news-spin 0.8s linear infinite;
+}
+
+@keyframes news-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Tablet */
+
+@media (max-width: 1000px) {
+    .news {
+        padding: 52px 24px 64px;
+    }
+
+    .news-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 24px;
+    }
+
+    .news-card-content {
+        padding: 21px;
+    }
+
+    .news-card-title {
+        font-size: 19px;
+    }
+}
+
+/* Móviles */
+
+@media (max-width: 600px) {
+    .news {
+        padding: 38px 16px 48px;
+    }
+
+    .news-heading {
+        margin-bottom: 26px;
+    }
+
+    .news-heading h2 {
+        font-size: 30px;
+    }
+
+    .news-subtitle {
+        font-size: 14px;
+    }
+
+    .news-grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 22px;
+    }
+
+    .news-card-image {
+        aspect-ratio: 16 / 9;
+    }
+
+    .news-card-content {
+        padding: 21px;
+    }
+
+    .news-card-title {
+        font-size: 20px;
+    }
+
+    .news-card-summary {
+        -webkit-line-clamp: 3;
+        line-clamp: 3;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .news-card,
+    .news-card-image img,
+    .news-read-more,
+    .news-read-more span {
+        transition: none;
+    }
+
+    .news-loader {
+        animation: none;
+    }
 }

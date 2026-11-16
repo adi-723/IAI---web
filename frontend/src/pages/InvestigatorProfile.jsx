@@ -1,4 +1,4 @@
-import Layout from "../components/Layout";
+import Layout from "../components/Layout/Layout";
 import InvestigatorProfile from "../components/Investigators/InvestigatorProfile";
 
 function InvestigatorProfilePage() {

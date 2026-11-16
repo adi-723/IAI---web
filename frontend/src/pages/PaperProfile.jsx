@@ -1,4 +1,4 @@
-import Layout from "../components/Layout";
+import Layout from "../components/Layout/Layout";
 
 import { useParams } from "react-router-dom";
 

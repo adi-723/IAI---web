@@ -341,7 +341,7 @@ class NewsRepository
     }
 
 
-    /*
+        /*
     |--------------------------------------------------------------------------
     | ELIMINAR NOTICIA
     |--------------------------------------------------------------------------
@@ -352,36 +352,33 @@ class NewsRepository
         $this->connection->beginTransaction();
 
         try {
-
-            /*
-            Eliminamos la noticia.
-
-            Gracias a:
-
-            ON DELETE CASCADE
-
-            también se eliminarán automáticamente
-            sus traducciones.
-            */
-
+            // Intentamos eliminar la noticia por su ID.
             $statement = $this->connection->prepare(
-                "DELETE FROM news
-                 WHERE id = :id"
+                "DELETE FROM news WHERE id = :id"
             );
 
             $statement->execute([
                 ":id" => $id
             ]);
 
+            // Comprobamos si MySQL eliminó algún registro.
+            if ($statement->rowCount() === 0) {
+                $this->connection->rollBack();
 
+                throw new Exception(
+                    "No existe una noticia con el ID indicado."
+                );
+            }
+
+            // Confirmamos la eliminación.
             $this->connection->commit();
 
             return true;
 
-
-        } catch (Exception $error) {
-
-            $this->connection->rollBack();
+        } catch (Throwable $error) {
+            if ($this->connection->inTransaction()) {
+                $this->connection->rollBack();
+            }
 
             throw $error;
         }

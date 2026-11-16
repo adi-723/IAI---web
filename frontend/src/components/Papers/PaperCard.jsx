@@ -4,44 +4,48 @@ import Card from "../UI/Card/Card";
 import Button from "../UI/Button/Button";
 
 import { useLanguage } from "../../context/LanguageContext";
+
 import { Link } from "react-router-dom";
 
+
 function PaperCard({
-
     id,
-
     title,
-
     summary,
-
     image
+}) {
 
-}){
     const { t } = useLanguage();
 
-    return(
+
+    return (
 
         <Card className="paper-card">
 
             <div className="paper-image">
 
-                {image}
+                {image && (
+
+                    <img
+                        src={image}
+                        alt={title}
+                    />
+
+                )}
 
             </div>
+
 
             <div className="paper-content">
 
                 <h3>
-
                     {title}
-
                 </h3>
 
                 <p>
-
                     {summary}
-
                 </p>
+
 
                 <Link to={`/papers/${id}`}>
 
@@ -58,7 +62,6 @@ function PaperCard({
         </Card>
 
     );
-
 }
 
 export default PaperCard;

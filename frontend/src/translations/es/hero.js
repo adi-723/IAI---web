@@ -1,11 +1,11 @@
 const hero = {
 
-    badge: "Instituto de Inteligencia Artificial",
+    badge: "Instituto de Alta Investigación",
 
     title: "Investigación para transformar el futuro",
 
     description:
-        "Impulsamos el desarrollo científico mediante Inteligencia Artificial, Ciencia de Datos e innovación tecnológica.",
+        "Impulsamos el desarrollo científico mediante  Ciencia de Datos e innovación tecnológica.",
 
     button: "Explorar investigaciones"
 

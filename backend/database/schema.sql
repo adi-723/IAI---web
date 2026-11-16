@@ -1,292 +1,177 @@
--- =====================================================
--- BASE DE DATOS
--- Instituto de Inteligencia Artificial
--- =====================================================
-
-CREATE DATABASE IF NOT EXISTS instituto_iai;
-
-USE instituto_iai;
-
-CREATE TABLE investigators (
-
-    id INT AUTO_INCREMENT PRIMARY KEY,
-
-    slug VARCHAR(100) NOT NULL UNIQUE,
-
-    image VARCHAR(255),
-
-    email VARCHAR(150),
-
-    office VARCHAR(150),
-
-    scholar VARCHAR(255),
-
-    orcid VARCHAR(255),
-
-    researchgate VARCHAR(255),
-
-    website VARCHAR(255),
-
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-
-);
-
-CREATE TABLE investigator_translations (
-
-    id INT AUTO_INCREMENT PRIMARY KEY,
-
-    investigator_id INT NOT NULL,
-
-    language CHAR(2) NOT NULL,
-
-    name VARCHAR(200) NOT NULL,
-
-    degree VARCHAR(200),
-
-    position VARCHAR(200),
-
-    area VARCHAR(200),
-
-    summary TEXT,
-
-    biography LONGTEXT,
-
-    FOREIGN KEY (investigator_id)
-        REFERENCES investigators(id)
-        ON DELETE CASCADE
-
-);
-
-CREATE TABLE investigator_interests (
-
-    id INT AUTO_INCREMENT PRIMARY KEY,
-
-    investigator_id INT,
-
-    language CHAR(2),
-
-    interest VARCHAR(200),
-
-    FOREIGN KEY (investigator_id)
-
-        REFERENCES investigators(id)
-
-        ON DELETE CASCADE
-
-);
-
-CREATE TABLE investigator_education (
-
-    id INT AUTO_INCREMENT PRIMARY KEY,
-
-    investigator_id INT,
-
-    language CHAR(2),
-
-    education TEXT,
-
-    FOREIGN KEY (investigator_id)
-
-        REFERENCES investigators(id)
-
-        ON DELETE CASCADE
-
-);
-
-CREATE TABLE research_groups (
-
-    id INT AUTO_INCREMENT PRIMARY KEY,
-
-    slug VARCHAR(120),
-
-    image VARCHAR(255)
-
-);
-
-CREATE TABLE research_group_translations (
-
-    id INT AUTO_INCREMENT PRIMARY KEY,
-
-    research_group_id INT,
-
-    language CHAR(2),
-
-    name VARCHAR(200),
-
-    summary TEXT,
-
-    description LONGTEXT,
-
-    FOREIGN KEY (research_group_id)
-
-        REFERENCES research_groups(id)
-
-        ON DELETE CASCADE
-
-);
-
-CREATE TABLE investigator_group (
-
-    investigator_id INT,
-
-    research_group_id INT,
-
-    PRIMARY KEY(
-
-        investigator_id,
-
-        research_group_id
-
-    ),
-
-    FOREIGN KEY (investigator_id)
-
-        REFERENCES investigators(id)
-
-        ON DELETE CASCADE,
-
-    FOREIGN KEY (research_group_id)
-
-        REFERENCES research_groups(id)
-
-        ON DELETE CASCADE
-
-);
-
-CREATE TABLE papers (
-
-    id INT AUTO_INCREMENT PRIMARY KEY,
-
-    image VARCHAR(255),
-
-    doi VARCHAR(255),
-
-    publication_date DATE,
-
-    journal VARCHAR(255),
-
-    pdf VARCHAR(255),
-
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-
-);
-
-CREATE TABLE paper_translations (
-
-    id INT AUTO_INCREMENT PRIMARY KEY,
-
-    paper_id INT,
-
-    language CHAR(2),
-
-    title VARCHAR(300),
-
-    abstract LONGTEXT,
-
-    keywords TEXT,
-
-    FOREIGN KEY (paper_id)
-
-        REFERENCES papers(id)
-
-        ON DELETE CASCADE
-
-);
-
-CREATE TABLE paper_authors (
-
-    paper_id INT,
-
-    investigator_id INT,
-
-    PRIMARY KEY(
-
-        paper_id,
-
-        investigator_id
-
-    ),
-
-    FOREIGN KEY (paper_id)
-
-        REFERENCES papers(id)
-
-        ON DELETE CASCADE,
-
-    FOREIGN KEY (investigator_id)
-
-        REFERENCES investigators(id)
-
-        ON DELETE CASCADE
-
-);
-
-CREATE TABLE news (
-
-    id INT AUTO_INCREMENT PRIMARY KEY,
-
-    image VARCHAR(255),
-
-    publish_date DATE,
-
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-
-);
-
-CREATE TABLE news_translations (
-
-    id INT AUTO_INCREMENT PRIMARY KEY,
-
-    news_id INT,
-
-    language CHAR(2),
-
-    title VARCHAR(300),
-
-    summary TEXT,
-
-    content LONGTEXT,
-
-    FOREIGN KEY (news_id)
-
-        REFERENCES news(id)
-
-        ON DELETE CASCADE
-
-);
+-- ============================================================
+-- ESQUEMA DE BASE DE DATOS - INSTITUTO IAI
+-- Ejecutar en phpMyAdmin seleccionando la base instituto_iai.
+-- ATENCION: este archivo elimina y vuelve a crear las tablas.
+-- Realiza una copia de seguridad antes de ejecutarlo.
+-- ============================================================
+
+SET FOREIGN_KEY_CHECKS = 0;
+DROP TABLE IF EXISTS `paper_research_group`;
+DROP TABLE IF EXISTS `paper_authors`;
+DROP TABLE IF EXISTS `paper_translations`;
+DROP TABLE IF EXISTS `papers`;
+DROP TABLE IF EXISTS `news_translations`;
+DROP TABLE IF EXISTS `news`;
+DROP TABLE IF EXISTS `users`;
+DROP TABLE IF EXISTS `investigator_group`;
+DROP TABLE IF EXISTS `research_group_translations`;
+DROP TABLE IF EXISTS `research_groups`;
+DROP TABLE IF EXISTS `investigator_education`;
+DROP TABLE IF EXISTS `investigator_interests`;
+DROP TABLE IF EXISTS `investigator_translations`;
+DROP TABLE IF EXISTS `investigators`;
+DROP TABLE IF EXISTS `roles`;
+
+SET FOREIGN_KEY_CHECKS = 1;
 
 CREATE TABLE roles (
-
-    id INT AUTO_INCREMENT PRIMARY KEY,
-
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(50) NOT NULL UNIQUE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-);
+CREATE TABLE investigators (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    slug VARCHAR(120) NOT NULL UNIQUE,
+    image VARCHAR(500) NULL,
+    email VARCHAR(255) NULL,
+    office VARCHAR(150) NULL,
+    scholar VARCHAR(500) NULL,
+    orcid VARCHAR(500) NULL,
+    researchgate VARCHAR(500) NULL,
+    website VARCHAR(500) NULL,
+    active BOOLEAN NOT NULL DEFAULT TRUE,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE investigator_translations (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    investigator_id INT UNSIGNED NOT NULL,
+    language VARCHAR(10) NOT NULL,
+    name VARCHAR(200) NOT NULL,
+    last_name VARCHAR(200) NOT NULL,
+    degree VARCHAR(255) NULL,
+    position VARCHAR(255) NULL,
+    area VARCHAR(255) NULL,
+    summary TEXT NULL,
+    biography LONGTEXT NULL,
+    UNIQUE KEY uq_investigator_language (investigator_id, language),
+    CONSTRAINT fk_inv_translation_investigator FOREIGN KEY (investigator_id) REFERENCES investigators(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE investigator_interests (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    investigator_id INT UNSIGNED NOT NULL,
+    language VARCHAR(10) NOT NULL,
+    interest VARCHAR(200) NOT NULL,
+    UNIQUE KEY uq_investigator_interest (investigator_id, language, interest),
+    CONSTRAINT fk_interest_investigator FOREIGN KEY (investigator_id) REFERENCES investigators(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE investigator_education (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    investigator_id INT UNSIGNED NOT NULL,
+    language VARCHAR(10) NOT NULL,
+    education TEXT NOT NULL,
+    CONSTRAINT fk_education_investigator FOREIGN KEY (investigator_id) REFERENCES investigators(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE research_groups (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    slug VARCHAR(120) NOT NULL UNIQUE,
+    image VARCHAR(500) NULL,
+    active BOOLEAN NOT NULL DEFAULT TRUE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE research_group_translations (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    research_group_id INT UNSIGNED NOT NULL,
+    language VARCHAR(10) NOT NULL,
+    name VARCHAR(200) NOT NULL,
+    summary TEXT NULL,
+    description LONGTEXT NULL,
+    UNIQUE KEY uq_research_group_language (research_group_id, language),
+    CONSTRAINT fk_group_translation_group FOREIGN KEY (research_group_id) REFERENCES research_groups(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE investigator_group (
+    investigator_id INT UNSIGNED NOT NULL,
+    research_group_id INT UNSIGNED NOT NULL,
+    PRIMARY KEY (investigator_id, research_group_id),
+    CONSTRAINT fk_inv_group_investigator FOREIGN KEY (investigator_id) REFERENCES investigators(id) ON DELETE CASCADE,
+    CONSTRAINT fk_inv_group_group FOREIGN KEY (research_group_id) REFERENCES research_groups(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE papers (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    image VARCHAR(500) NULL,
+    doi VARCHAR(255) NULL,
+    publication_date DATE NULL,
+    journal VARCHAR(255) NULL,
+    pdf VARCHAR(500) NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE paper_translations (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    paper_id INT UNSIGNED NOT NULL,
+    language VARCHAR(10) NOT NULL,
+    title VARCHAR(500) NOT NULL,
+    abstract LONGTEXT NULL,
+    keywords TEXT NULL,
+    UNIQUE KEY uq_paper_language (paper_id, language),
+    CONSTRAINT fk_paper_translation_paper FOREIGN KEY (paper_id) REFERENCES papers(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE paper_authors (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    paper_id INT UNSIGNED NOT NULL,
+    investigator_id INT UNSIGNED NULL,
+    name VARCHAR(200) NOT NULL,
+    author_order INT UNSIGNED NOT NULL,
+    UNIQUE KEY uq_paper_author_order (paper_id, author_order),
+    CONSTRAINT fk_paper_author_paper FOREIGN KEY (paper_id) REFERENCES papers(id) ON DELETE CASCADE,
+    CONSTRAINT fk_paper_author_investigator FOREIGN KEY (investigator_id) REFERENCES investigators(id) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE paper_research_group (
+    paper_id INT UNSIGNED NOT NULL,
+    research_group_id INT UNSIGNED NOT NULL,
+    PRIMARY KEY (paper_id, research_group_id),
+    CONSTRAINT fk_paper_group_paper FOREIGN KEY (paper_id) REFERENCES papers(id) ON DELETE CASCADE,
+    CONSTRAINT fk_paper_group_group FOREIGN KEY (research_group_id) REFERENCES research_groups(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE news (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    image VARCHAR(500) NULL,
+    publish_date DATETIME NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE news_translations (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    news_id INT UNSIGNED NOT NULL,
+    language VARCHAR(10) NOT NULL,
+    title VARCHAR(500) NOT NULL,
+    summary TEXT NULL,
+    content LONGTEXT NULL,
+    UNIQUE KEY uq_news_language (news_id, language),
+    CONSTRAINT fk_news_translation_news FOREIGN KEY (news_id) REFERENCES news(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE users (
-
-    id INT AUTO_INCREMENT PRIMARY KEY,
-
-    role_id INT NOT NULL,
-
-    investigator_id INT NULL,
-
-    username VARCHAR(100) UNIQUE NOT NULL,
-
-    email VARCHAR(150) UNIQUE NOT NULL,
-
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    role_id INT UNSIGNED NOT NULL,
+    investigator_id INT UNSIGNED NULL,
+    username VARCHAR(100) NOT NULL UNIQUE,
+    email VARCHAR(255) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
+    active BOOLEAN NOT NULL DEFAULT TRUE,
+    email_verified_at TIMESTAMP NULL DEFAULT NULL,
+    must_change_password BOOLEAN NOT NULL DEFAULT TRUE,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE KEY uq_user_investigator (investigator_id),
+    CONSTRAINT fk_user_role FOREIGN KEY (role_id) REFERENCES roles(id),
+    CONSTRAINT fk_user_investigator FOREIGN KEY (investigator_id) REFERENCES investigators(id) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-    active BOOLEAN DEFAULT TRUE,
-
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-
-    FOREIGN KEY (role_id)
-
-        REFERENCES roles(id),
-
-    FOREIGN KEY (investigator_id)
-
-        REFERENCES investigators(id)
-
-);

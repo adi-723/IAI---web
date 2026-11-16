@@ -3,90 +3,101 @@ import { useEffect, useState } from "react";
 import "./InvestigatorSection.css";
 
 import Container from "../UI/Container/Container";
-
 import InvestigatorCard from "./InvestigatorCard";
 
 import { get } from "../../services/api";
+import { useLanguage } from "../../context/LanguageContext";
 
+import investigatorsES from "../../translations/es/investigators";
+import investigatorsEN from "../../translations/en/investigators";
 
 function InvestigatorSection() {
+    const { language } = useLanguage();
+
+    const t = language === "es"
+        ? investigatorsES
+        : investigatorsEN;
 
     const [investigators, setInvestigators] = useState([]);
+    const [researchGroups, setResearchGroups] = useState([]);
 
     const [search, setSearch] = useState("");
-
-    const [selectedArea, setSelectedArea] =
-        useState("Todas las áreas");
+    const [selectedGroup, setSelectedGroup] = useState("");
 
     const [loading, setLoading] = useState(true);
-
     const [error, setError] = useState(null);
-
 
     /*
     |--------------------------------------------------------------------------
-    | CARGAR INVESTIGADORES DESDE LA API
+    | CARGAR INVESTIGADORES Y GRUPOS
     |--------------------------------------------------------------------------
     */
 
     useEffect(() => {
+        let active = true;
 
-        async function loadInvestigators() {
-
+        async function loadData() {
             try {
-
                 setLoading(true);
-
                 setError(null);
 
-                const data = await get(
-                    "/investigators/getAll.php?language=es"
-                );
+                const [investigatorResponse, groupResponse] =
+                    await Promise.all([
+                        get(`/investigators/getAll.php?language=${language}`),
+                        get(`/research/getAll.php?language=${language}`)
+                    ]);
 
-                setInvestigators(data);
+                if (!active) return;
+
+                const investigatorData =
+                    investigatorResponse?.data ?? investigatorResponse;
+
+                const groupData =
+                    groupResponse?.data ?? groupResponse;
+
+                if (!Array.isArray(investigatorData)) {
+                    throw new Error("La respuesta de investigadores no es válida.");
+                }
+
+                if (!Array.isArray(groupData)) {
+                    throw new Error("La respuesta de grupos no es válida.");
+                }
+
+                setInvestigators(investigatorData);
+                setResearchGroups(groupData);
 
             } catch (err) {
+                console.error("Error al cargar investigadores y grupos:", err);
 
-                console.error(
-                    "Error al cargar investigadores:",
-                    err
-                );
-
-                setError(err.message);
+                if (active) {
+                    setError(t.loadError);
+                }
 
             } finally {
-
-                setLoading(false);
-
+                if (active) {
+                    setLoading(false);
+                }
             }
         }
 
-        loadInvestigators();
+        loadData();
 
-    }, []);
+        return () => {
+            active = false;
+        };
 
+    }, [language]);
 
     /*
     |--------------------------------------------------------------------------
-    | ÁREAS
+    | REINICIAR FILTROS AL CAMBIAR IDIOMA
     |--------------------------------------------------------------------------
-    |
-    | Las áreas ahora se obtienen directamente desde MySQL.
-    |
     */
 
-    const areas = [
-        "Todas las áreas",
-
-        ...new Set(
-            investigators
-                .map(
-                    investigator => investigator.area
-                )
-                .filter(Boolean)
-        )
-    ];
-
+    useEffect(() => {
+        setSelectedGroup("");
+        setSearch("");
+    }, [language]);
 
     /*
     |--------------------------------------------------------------------------
@@ -94,62 +105,46 @@ function InvestigatorSection() {
     |--------------------------------------------------------------------------
     */
 
-    const filtered = investigators.filter(
-        (investigator) => {
+    const filtered = investigators.filter((investigator) => {
+        const fullName = [
+            investigator.name,
+            investigator.last_name
+        ]
+            .filter(Boolean)
+            .join(" ");
 
-            const name =
-                investigator.name || "";
+        const searchText = search.toLowerCase();
 
-            const area =
-                investigator.area || "";
+        const matchName = fullName
+            .toLowerCase()
+            .includes(searchText);
 
+        const groupIds = Array.isArray(investigator.research_group_ids)
+            ? investigator.research_group_ids.map(Number)
+            : [];
 
-            const matchName =
-                name
-                    .toLowerCase()
-                    .includes(
-                        search.toLowerCase()
-                    );
+        const matchGroup =
+            selectedGroup === "" ||
+            groupIds.includes(Number(selectedGroup));
 
-
-            const matchArea =
-                selectedArea ===
-                    "Todas las áreas" ||
-                area === selectedArea;
-
-
-            return matchName && matchArea;
-
-        }
-    );
-
+        return matchName && matchGroup;
+    });
 
     /*
     |--------------------------------------------------------------------------
-    | CARGANDO
+    | CARGA
     |--------------------------------------------------------------------------
     */
 
     if (loading) {
-
         return (
-
             <section className="investigator-section">
-
                 <Container>
-
-                    <p>
-                        Cargando investigadores...
-                    </p>
-
+                    <p>{t.loading}</p>
                 </Container>
-
             </section>
-
         );
-
     }
-
 
     /*
     |--------------------------------------------------------------------------
@@ -158,27 +153,14 @@ function InvestigatorSection() {
     */
 
     if (error) {
-
         return (
-
             <section className="investigator-section">
-
                 <Container>
-
-                    <p>
-                        Error al cargar los investigadores:
-                        {" "}
-                        {error}
-                    </p>
-
+                    <p>{error}</p>
                 </Container>
-
             </section>
-
         );
-
     }
-
 
     /*
     |--------------------------------------------------------------------------
@@ -187,95 +169,56 @@ function InvestigatorSection() {
     */
 
     return (
-
         <section className="investigator-section">
-
             <Container>
 
                 <div className="investigator-filters">
 
                     <input
-
                         type="text"
-
-                        placeholder="Buscar investigador..."
-
+                        placeholder={t.search}
                         value={search}
-
-                        onChange={(e) =>
-                            setSearch(e.target.value)
-                        }
-
+                        onChange={(e) => setSearch(e.target.value)}
                     />
 
-
                     <select
-
-                        value={selectedArea}
-
-                        onChange={(e) =>
-                            setSelectedArea(
-                                e.target.value
-                            )
-                        }
-
+                        value={selectedGroup}
+                        onChange={(e) => setSelectedGroup(e.target.value)}
                     >
+                        <option value="">
+                            {t.filter}
+                        </option>
 
-                        {areas.map((area) => (
-
+                        {researchGroups.map((group) => (
                             <option
-
-                                key={area}
-
-                                value={area}
-
+                                key={group.id}
+                                value={group.id}
                             >
-
-                                {area}
-
+                                {group.name}
                             </option>
-
                         ))}
-
                     </select>
 
                 </div>
 
-
                 <div className="investigator-list">
 
-                    {filtered.map(
-                        (investigator) => (
-
-                            <InvestigatorCard
-
-                                key={investigator.id}
-
-                                {...investigator}
-
-                            />
-
-                        )
-                    )}
+                    {filtered.map((investigator) => (
+                        <InvestigatorCard
+                            key={investigator.id}
+                            {...investigator}
+                        />
+                    ))}
 
                 </div>
 
-
                 {filtered.length === 0 && (
-
-                    <p>
-                        No se encontraron investigadores.
-                    </p>
-
+                    <p>{t.noResults}</p>
                 )}
 
             </Container>
-
         </section>
-
     );
-
 }
-
 
 export default InvestigatorSection;

@@ -1,4 +1,4 @@
-import Layout from "../components/Layout";
+import Layout from "../components/Layout/Layout";
 
 import ResearchSection from "../components/ResearchGroups/ResearchSection";
 

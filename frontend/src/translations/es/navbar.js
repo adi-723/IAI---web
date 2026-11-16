@@ -6,7 +6,7 @@ const navbar = {
 
     papers: "Papers",
 
-    investigators: "Investigadores",
+    investigators: "Personal",
 
     news: "Noticias",
 

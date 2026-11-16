@@ -1,18 +1,30 @@
-const investigators = {
 
-    title: "Researchers",
+const investigators = {
+    title: "Our Staff",
 
     subtitle:
-        "Meet the researchers who are part of the Institute.",
+        "Meet the people who are part of our Institute.",
 
-    search: "Search researcher...",
+    search:
+        "Search staff...",
 
-    filter: "All research areas",
+    filter:
+        "All areas",
 
-    profile: "View profile",
+    profile:
+        "View profile",
 
-    scholar: "Google Scholar"
+    scholar:
+        "Google Scholar",
 
+    loading:
+        "Loading staff...",
+
+    loadError:
+        "Could not load staff.",
+
+    noResults:
+        "No staff members found."
 };
 
 export default investigators;

@@ -1,90 +1,61 @@
+
 import "./ResearchCard.css";
 
 import Card from "../UI/Card/Card";
-import Button from "../UI/Button/Button";
-
 import { Link } from "react-router-dom";
 import { useLanguage } from "../../context/LanguageContext";
 
 function ResearchCard({
-
     slug,
-
     name,
-
     image,
-
     summary,
-
-    investigators,
-
-    papers
-
-}){
+    researchers_count = 0,
+    papers_count = 0
+}) {
     const { t } = useLanguage();
 
-    return(
+    return (
+        <Link
+            to={`/investigaciones/${slug}`}
+            className="research-card-link"
+        >
+            <Card className="research-card">
 
-        <Card className="research-card">
+                <div className="research-image">
+                    <img
+                        src={image}
+                        alt={name}
+                    />
+                </div>
 
-            <div className="research-image">
+                <div className="research-info">
 
-                <img
+                    <h3>{name}</h3>
 
-                    src={image}
+                    <p>{summary}</p>
 
-                    alt={name}
+                    <div className="research-stats">
 
-                />
+                        <span>
+                            👨‍🔬 {researchers_count} {t.research.researchers}
+                        </span>
 
-            </div>
+                        <span>
+                            📄 {papers_count} {t.research.papers}
+                        </span>
 
-            <div className="research-info">
+                    </div>
 
-                <h3>
-
-                    {name}
-
-                </h3>
-
-                <p>
-
-                    {summary}
-
-                </p>
-
-                <div className="research-stats">
-
-                    <span>
-
-                        👨‍🔬 {investigators.length} {t.research.researchers}
-
-                    </span>
-
-                    <span>
-
-                        📄 {papers.length} {t.research.papers}
-
+                    <span className="research-explore">
+                        {t.research.explore} →
                     </span>
 
                 </div>
 
-                <Link to={`/investigaciones/${slug}`}>
-
-                    <Button>
-
-                        {t.research.explore}
-
-                    </Button>
-
-                </Link>
-
-            </div>
-
-        </Card>
-
+            </Card>
+        </Link>
     );
-
 }
 
 export default ResearchCard;

@@ -1,4 +1,4 @@
-import Layout from "../components/Layout";
+import Layout from "../components/Layout/Layout";
 import InvestigatorHeader from "../components/Investigators/InvestigatorHeader";
 import InvestigatorSection from "../components/Investigators/InvestigatorSection";
 

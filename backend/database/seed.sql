@@ -1,4 +1,14 @@
-INSERT INTO roles (name)
+-- ============================================================
+-- DATOS INICIALES - INSTITUTO IAI
+-- Ejecutar DESPUES de schema.sql, sobre las tablas recien creadas.
+-- Este seed conserva los IDs explicitos originales (investigadores 1-19, grupos 1-10).
+-- Usuario inicial: admin | Clave temporal: 123456
+-- La contraseña se guarda como hash bcrypt y exige cambio al primer acceso.
+-- ============================================================
+
+START TRANSACTION;
+
+INSERT IGNORE INTO roles (name)
 
 VALUES
 
@@ -28,7 +38,7 @@ VALUES
 'barriaza@instituto.cl',
 'Oficina 201',
 'https://scholar.google.com/citations?hl=es&user=oaqR2GoAAAAJ',
-'https://orcid.org/',
+'https://orcid.org/0000-0001-9921-9253',
 'https://researchgate.net/',
 'https://instituto.cl'
 ),
@@ -39,7 +49,7 @@ VALUES
 'vayala@instituto.cl',
 'Oficina 201',
 'https://scholar.google.com/citations?hl=es&user=RZCVWgYAAAAJ',
-'https://orcid.org/',
+'https://orcid.org/0000-0001-5467-4180',
 'https://researchgate.net/',
 'https://instituto.cl'
 ),
@@ -50,7 +60,7 @@ VALUES
 'gcalaf@instituto.cl',
 'Oficina 201',
 'https://scholar.google.com/citations?hl=es&user=iDXn65gAAAAJ',
-'https://orcid.org/',
+'https://orcid.org/0000-0003-3542-296X',
 'https://researchgate.net/',
 'https://instituto.cl'
 ),
@@ -61,7 +71,7 @@ VALUES
 'jcarballo@instituto.cl',
 'Oficina 201',
 'https://scholar.google.com/citations?hl=es&user=h63gYiQAAAAJ',
-'https://orcid.org/',
+'https://orcid.org/0000-0002-3690-105X',
 'https://researchgate.net/',
 'https://instituto.cl'
 ),
@@ -72,7 +82,7 @@ VALUES
 'acaqueo@instituto.cl',
 'Oficina 201',
 'https://scholar.google.com/citations?hl=es&user=xu1R9IcAAAAJ',
-'https://orcid.org/',
+'https://orcid.org/0000-0002-4614-8380',
 'https://researchgate.net/',
 'https://instituto.cl'
 ),
@@ -83,7 +93,7 @@ VALUES
 'lgnanasekaran@instituto.cl',
 'Oficina 201',
 'https://scholar.google.com/citations?hl=es&user=LA_jYHAAAAAJ',
-'https://orcid.org/',
+'https://orcid.org/0009-0005-1560-2965',
 'https://researchgate.net/',
 'https://instituto.cl'
 ),
@@ -94,7 +104,7 @@ VALUES
 'sgonzales@instituto.cl',
 'Oficina 201',
 'https://scholar.google.com/',
-'https://orcid.org/',
+'https://orcid.org/0000-0002-0661-1051',
 'https://researchgate.net/',
 'https://instituto.cl'
 ),
@@ -105,7 +115,7 @@ VALUES
 'skabana@instituto.cl',
 'Oficina 201',
 'https://scholar.google.com/citations?hl=es&user=2hluzDsAAAAJ',
-'https://orcid.org/',
+'https://orcid.org/0000-0003-0568-5750',
 'https://researchgate.net/',
 'https://instituto.cl'
 ),
@@ -116,7 +126,7 @@ VALUES
 'dlaroze@instituto.cl',
 'Oficina 201',
 'https://scholar.google.com/citations?hl=es&user=TKDdBTkAAAAJ',
-'https://orcid.org/',
+'https://orcid.org/0000-0002-6487-8096',
 'https://researchgate.net/',
 'https://instituto.cl'
 ),
@@ -127,7 +137,7 @@ VALUES
 'flara@instituto.cl',
 'Oficina 201',
 'https://scholar.google.com/citations?hl=es&user=R_hHTxsAAAAJ',
-'https://orcid.org/',
+'https://orcid.org/0000-0002-9965-0921',
 'https://researchgate.net/',
 'https://instituto.cl'
 ),
@@ -137,8 +147,8 @@ VALUES
 '/images/investigators/giuliano-pignata.png',
 'gpignata@instituto.cl',
 'Oficina 201',
-'https://scholar.google.com/',
-'https://orcid.org/',
+'https://scholar.google.com/citations?user=vUrV_pYAAAAJ&hl=es&oi=ao',
+'https://orcid.org/0000-0003-0006-0188',
 'https://researchgate.net/',
 'https://instituto.cl'
 ),
@@ -149,7 +159,7 @@ VALUES
 'erodriguezponce@instituto.cl',
 'Oficina 201',
 'https://scholar.google.com/citations?hl=es&user=OSSLHcAAAAAJ',
-'https://orcid.org/',
+'https://orcid.org/0000-0003-4861-002X',
 'https://researchgate.net/',
 'https://instituto.cl'
 ),
@@ -171,7 +181,7 @@ VALUES
 'srajendran@instituto.cl',
 'Oficina 202',
 'https://scholar.google.com/',
-'https://orcid.org/',
+'https://orcid.org/0000-0002-0528-0502',
 'https://researchgate.net/',
 'https://instituto.cl'
 ),
@@ -182,7 +192,7 @@ VALUES
 'brojas@instituto.cl',
 'Oficina 202',
 'https://scholar.google.com/citations?hl=es&user=7Yqek_0AAAAJ',
-'https://orcid.org/',    
+'https://orcid.org/0000-0002-0149-1302',    
 'https://researchgate.net/',
 'https://instituto.cl'
 ),
@@ -193,7 +203,7 @@ VALUES
 'csantoro@instituto.cl',
 'Oficina 203',
 'https://scholar.google.com/citations?hl=es&user=t8hdQjYAAAAJ',
-'https://orcid.org/',
+'https://orcid.org/0000-0002-3702-8408',
 'https://researchgate.net/',
 'https://instituto.cl'
 ),
@@ -204,7 +214,7 @@ VALUES
 'sthakur@instituto.cl',
 'Oficina 203',
 'https://scholar.google.com/citations?hl=es&user=A2PKGsUAAAAJ',
-'https://orcid.org/',
+'https://orcid.org/0000-0002-1647-0360',
 'https://researchgate.net/',
 'https://instituto.cl'
 ),
@@ -226,7 +236,7 @@ VALUES
 'asfr@instituto.cl',
 'Oficina 204',
 'https://scholar.google.com/',
-'https://orcid.org/',
+'https://orcid.org/0000-0002-2404-0467',
 'https://researchgate.net/',
 'https://instituto.cl'
 );
@@ -236,6 +246,7 @@ INSERT INTO investigator_translations
     investigator_id,
     language,
     name,
+    last_name,
     degree,
     position,
     area,
@@ -251,7 +262,8 @@ VALUES
 (
 1,
 'es',
-'Bernardo Arriaza Torres',
+'Bernardo',
+'Arriaza Torres',
 'Ph.D. Antropología Física',
 'Investigador Principal',
 'Bioarqueología',
@@ -262,7 +274,8 @@ VALUES
 (
 1,
 'en',
-'Bernardo Arriaza Torres',
+'Bernardo',
+'Arriaza Torres',
 'Ph.D. Physical Anthropology',
 'Principal Researcher',
 'Bioarchaeology',
@@ -277,7 +290,8 @@ VALUES
 (
 2,
 'es',
-'Víctor Ayala Bravo',
+'Víctor',
+'Ayala Bravo',
 'Doctor en Matemáticas',
 'Profesor titular',
 'Teoría geométrica de control y sistemas lineales',
@@ -288,7 +302,8 @@ VALUES
 (
 2,
 'en',
-'Victor Ayala Bravo',
+'Víctor',
+'Ayala Bravo',
 'Doctor in Mathematics',
 'Title Professor',
 'Geometric Control Theory and Linear Systems',
@@ -303,7 +318,8 @@ VALUES
 (
 3,
 'es',
-'Gloria Calaf Sarrat',
+'Gloria',
+'Calaf Sarrat',
 'Doctora en anatomía',
 'Profesora titular',
 'Biología del cáncer',
@@ -314,7 +330,8 @@ VALUES
 (
 3,
 'en',
-'Gloria Calaf Sarrat',
+'Gloria',
+'Calaf Sarrat',
 'Doctorate in Anatomy',
 'Title Professor',
 'Cancer Biology',
@@ -329,7 +346,8 @@ VALUES
 (
 4,
 'es',
-'Julio Alberto Carballo Bello',
+'Julio Alberto',
+'Carballo Bello',
 'Doctor en Astronomía',
 'Astrónomo e investigador',
 'Astronomía galáctica',
@@ -340,7 +358,8 @@ VALUES
 (
 4,
 'en',
-'Julio Alberto Carballo Bello',
+'Julio Alberto',
+'Carballo Bello',
 'PhD in Astronomy',
 'Astronomer and Researcher',
 'Galactic Astronomy',
@@ -355,7 +374,8 @@ VALUES
 (
 5,
 'es',
-'Alejandra Caqueo Urizar',
+'Alejandra',
+'Caqueo Urizar',
 'Doctora en Psicología',
 'Profesora e investigadora',
 'Salud mental comunitaria',
@@ -366,7 +386,8 @@ VALUES
 (
 5,
 'en',
-'Alejandra Caqueo Urizar',
+'Alejandra',
+'Caqueo Urizar',
 'PhD in Psychology',
 'Professor and Researcher',
 'Community Mental Health',
@@ -381,7 +402,8 @@ VALUES
 (
 6,
 'es',
-'Gnanasekaran Lalitha',
+'Lalitha',
+'Gnanasekaran',
 'Doctora en Física',
 'Académica e investigadora',
 'Nanomateriales y materiales funcionales',
@@ -392,7 +414,8 @@ VALUES
 (
 6,
 'en',
-'Gnanasekaran Lalitha',
+'Lalitha',
+'Gnanasekaran',
 'PhD in Physics',
 'Academic and Researcher',
 'Nanomaterials and Functional Materials',
@@ -407,7 +430,8 @@ VALUES
 (
 7,
 'es',
-'Sergio Alberto Gonzalez Miranda',
+'Sergio Alberto',
+'Gonzalez Miranda',
 'Doctor en Historia',
 'Profesor titular e investigador',
 'Historia del Norte de Chile y la región andina',
@@ -418,7 +442,8 @@ VALUES
 (
 7,
 'en',
-'Sergio Alberto Gonzalez Miranda',
+'Sergio Alberto',
+'Gonzalez Miranda',
 'PhD in History',
 'Full Professor and Researcher',
 'History of Northern Chile and the Andean Region',
@@ -433,7 +458,8 @@ VALUES
 (
 8,
 'es',
-'Sonia Kampana or Kabana',
+'Sonia Kampana or',
+'Kabana',
 'Doctora en Física',
 'Profesora e investigadora',
 'Física de altas energías',
@@ -444,7 +470,8 @@ VALUES
 (
 8,
 'en',
-'Sonia Kampana or Kabana',
+'Sonia Kampana or',
+'Kabana',
 'PhD in Physics',
 'Professor and Researcher',
 'High-Energy Physics',
@@ -459,7 +486,8 @@ VALUES
 (
 9,
 'es',
-'David Laroze Navarrete',
+'David',
+'Laroze Navarrete',
 'Doctor en Física',
 'Profesor titular e investigador',
 'Modelamiento matemático y física',
@@ -470,7 +498,8 @@ VALUES
 (
 9,
 'en',
-'David Laroze Navarrete',
+'David',
+'Laroze Navarrete',
 'PhD in Physics',
 'Full Professor and Researcher',
 'Mathematical Modeling and Physics',
@@ -485,7 +514,8 @@ VALUES
 (
 10,
 'es',
-'Felipe Ignacio Lara Obreque',
+'Felipe Ignacio',
+'Lara Obreque',
 'Doctor en Matemática',
 'Profesor asistente e investigador',
 'Matemática aplicada y optimización',
@@ -496,7 +526,8 @@ VALUES
 (
 10,
 'en',
-'Felipe Ignacio Lara Obreque',
+'Felipe Ignacio',
+'Lara Obreque',
 'PhD in Mathematics',
 'Assistant Professor and Researcher',
 'Applied Mathematics and Optimization',
@@ -511,7 +542,8 @@ VALUES
 (
 11,
 'es',
-'Pignata Giuliano',
+'Giuliano',
+'Pignata',
 'Doctor en Astronomía',
 'Profesor e investigador',
 'Astrofísica estelar y galáctica',
@@ -522,7 +554,8 @@ VALUES
 (
 11,
 'en',
-'Pignata Giuliano',
+'Giuliano',
+'Pignata',
 'PhD in Astronomy',
 'Professor and Researcher',
 'Stellar and Galactic Astrophysics',
@@ -537,7 +570,8 @@ VALUES
 (
 12,
 'es',
-'Emilio Rodríguez Ponce',
+'Emilio',
+'Rodríguez Ponce',
 'Doctor en Educación',
 'Profesor titular y académico',
 'Educación superior y gestión universitaria',
@@ -548,7 +582,8 @@ VALUES
 (
 12,
 'en',
-'Emilio Rodríguez Ponce',
+'Emilio',
+'Rodríguez Ponce',
 'PhD in Education',
 'Full Professor and Academic',
 'Higher Education and University Management',
@@ -563,7 +598,8 @@ VALUES
 (
 13,
 'es',
-'Francisco Rothhammer Engel',
+'Francisco',
+'Rothhammer Engel',
 'Doctor en Ciencias',
 'Profesor e investigador',
 'Genética de poblaciones y poblamiento americano',
@@ -574,7 +610,8 @@ VALUES
 (
 13,
 'en',
-'Francisco Rothhammer Engel',
+'Francisco',
+'Rothhammer Engel', 
 'PhD in Science',
 'Professor and Researcher',
 'Population Genetics and the Peopling of the Americas',
@@ -589,7 +626,8 @@ VALUES
 (
 14,
 'es',
-'Rajendran Saravanan',
+'Saravanan',
+'Rajendran',
 'Doctor en Ciencia de Materiales y Física',
 'Profesor e investigador',
 'Nanomateriales y tecnologías ambientales',
@@ -600,7 +638,8 @@ VALUES
 (
 14,
 'en',
-'Rajendran Saravanan',
+'Saravanan',
+'Rajendran',
 'PhD in Materials Science and Physics',
 'Professor and Researcher',
 'Nanomaterials and Environmental Technologies',
@@ -616,7 +655,8 @@ VALUES
 (
 15,
 'es',
-'Bárbara Rojas Ayala',
+'Bárbara',
+'Rojas Ayala',
 'Doctora en Astronomía',
 'Profesora asociada e investigadora',
 'Estrellas de baja masa y exoplanetas',
@@ -627,7 +667,8 @@ VALUES
 (
 15,
 'en',
-'Bárbara Rojas Ayala',
+'Bárbara',
+'Rojas Ayala',
 'PhD in Astronomy',
 'Associate Professor and Researcher',
 'Low-Mass Stars and Exoplanets',
@@ -644,7 +685,8 @@ VALUES
 (
 16,
 'es',
-'Calogero Santoro Vargas',
+'Calogero',
+'Santoro Vargas',
 'Doctor en Arqueología',
 'Profesor e investigador',
 'Arqueología y paleoambiente',
@@ -655,7 +697,8 @@ VALUES
 (
 16,
 'en',
-'Calogero Santoro Vargas',
+'Calogero',
+'Santoro Vargas',
 'PhD in Archaeology',
 'Professor and Researcher',
 'Archaeology and Paleoenvironment',
@@ -670,7 +713,8 @@ VALUES
 (
 17,
 'es',
-'Shalini Thakur',
+'Shalini',
+'Thakur',
 'Doctora en Física',
 'Investigadora',
 'Física experimental de altas energías e instrumentación',
@@ -681,7 +725,8 @@ VALUES
 (
 17,
 'en',
-'Shalini Thakur',
+'Shalini',
+'Thakur',
 'PhD in Physics',
 'Researcher',
 'Experimental High-Energy Physics and Instrumentation',
@@ -696,7 +741,8 @@ VALUES
 (
 18,
 'es',
-'Michael Schernau',
+'Michael',
+'Schernau',
 'Doctor en Física',
 'Investigador y académico',
 'Física experimental de altas energías',
@@ -707,7 +753,8 @@ VALUES
 (
 18,
 'en',
-'Michael Schernau',
+'Michael',
+'Schernau',
 'PhD in Physics',
 'Researcher and Academic',
 'Experimental High-Energy Physics',
@@ -722,7 +769,8 @@ VALUES
 (
 19,
 'es',
-'Alejandro San Francisco Reyes',
+'Alejandro',
+'San Francisco Reyes',
 'Doctor en Historia',
 'Profesor e investigador',
 'Historia contemporánea de Chile',
@@ -733,13 +781,42 @@ VALUES
 (
 19,
 'en',
-'Alejandro San Francisco Reyes',
+'Alejandro',
+'San Francisco Reyes',
 'PhD in History',
 'Professor and Researcher',
 'Contemporary Chilean History',
 'Dr. Alejandro San Francisco Reyes is an academic and professor at the IAI, specializing in history and social sciences.',
 'Dr. Alejandro San Francisco Reyes is an academic and researcher at the Institute for Advanced Research. His work focuses on contemporary Chilean history, historical memory, political history, and the study of recent social and political processes.'
 );
+
+-- =====================================================
+-- APELLIDOS PARA ORDENAR EL PERSONAL
+-- =====================================================
+
+UPDATE investigator_translations
+SET last_name = CASE investigator_id
+    WHEN 1 THEN 'Arriaza Torres'
+    WHEN 2 THEN 'Ayala Bravo'
+    WHEN 3 THEN 'Calaf Sarrat'
+    WHEN 4 THEN 'Carballo Bello'
+    WHEN 5 THEN 'Caqueo Urizar'
+    WHEN 6 THEN 'Gnanasekaran'
+    WHEN 7 THEN 'Gonzalez Miranda'
+    WHEN 8 THEN 'Kabana'
+    WHEN 9 THEN 'Laroze Navarrete'
+    WHEN 10 THEN 'Lara Obreque'
+    WHEN 11 THEN 'Pignata'
+    WHEN 12 THEN 'Rodriguez Ponce'
+    WHEN 13 THEN 'Rothhammer Engel'
+    WHEN 14 THEN 'Rajendran'
+    WHEN 15 THEN 'Rojas Ayala'
+    WHEN 16 THEN 'Santoro Vargas'
+    WHEN 17 THEN 'Thakur'
+    WHEN 18 THEN 'Schernau'
+    WHEN 19 THEN 'San Francisco Reyes'
+END
+WHERE investigator_id BETWEEN 1 AND 19;
 
 INSERT INTO investigator_interests
 (
@@ -935,22 +1012,7 @@ VALUES
 (19,'en','Historical Memory'),
 (19,'en','Social History');
 
-INSERT INTO users
-(
-    role_id,
-    username,
-    email,
-    password
-)
-
-VALUES
-
-(
-1,
-'admin',
-'admin@academicos.uta.cl',
-'123456'
-);
+/* ADMIN_USER_INSERTED_BY_PHP */
 
 INSERT INTO research_groups
 (id, slug, image)
@@ -1190,3 +1252,19 @@ VALUES
 -- =====================================================
 
 (13,10);
+
+-- Cuenta inicial de administrador. El ID del rol se obtiene por su nombre.
+INSERT INTO users
+    (role_id, username, email, password, active, must_change_password)
+SELECT
+    id,
+    'admin',
+    'admin@academicos.uta.cl',
+    '$2y$12$wWdQPH854aMDdmBCXKfYceNzgR5COt6OzPDUs3uk8k3VS71LhAJvK',
+    TRUE,
+    TRUE
+FROM roles
+WHERE name = 'Administrador'
+LIMIT 1;
+
+COMMIT;

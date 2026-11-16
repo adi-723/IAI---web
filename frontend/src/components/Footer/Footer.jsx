@@ -1,12 +1,25 @@
+
 import "./Footer.css";
 
-function Footer(){
+import { useLanguage } from "../../context/LanguageContext";
 
-    return(
+function Footer() {
+
+    const { t } = useLanguage();
+
+    return (
 
         <footer className="footer">
 
-            © 2026 Instituto de Inteligencia Artificial
+            <p>{t.footer.rights}</p>
+
+            <div className="footer-links">
+
+                <a href="/privacy">{t.footer.privacy}</a>
+
+                <a href="/terms">{t.footer.terms}</a>
+
+            </div>
 
         </footer>
 

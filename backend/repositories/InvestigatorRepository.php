@@ -12,8 +12,7 @@ class InvestigatorRepository
         $this->connection = $database->connect();
     }
 
-    public function getAll($language = "es")
-    {
+    public function getAll($language = "es") {
         $sql = "
             SELECT
                 i.id,
@@ -27,11 +26,18 @@ class InvestigatorRepository
                 i.website,
 
                 t.name,
+                t.last_name,
                 t.degree,
                 t.position,
                 t.area,
                 t.summary,
-                t.biography
+                t.biography,
+
+                (
+                    SELECT GROUP_CONCAT(ig.research_group_id)
+                    FROM investigator_group ig
+                    WHERE ig.investigator_id = i.id
+                ) AS research_group_ids
 
             FROM investigators i
 
@@ -40,23 +46,33 @@ class InvestigatorRepository
 
             WHERE t.language = :language
 
-            ORDER BY t.name ASC
+            ORDER BY t.last_name ASC, t.name ASC
         ";
 
         $statement = $this->connection->prepare($sql);
 
-        $statement->bindParam(
-            ":language",
-            $language
-        );
+        $statement->bindParam(":language", $language);
 
         $statement->execute();
 
-        return $statement->fetchAll(PDO::FETCH_ASSOC);
+        $investigators = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ($investigators as &$investigator) {
+            $investigator["research_group_ids"] =
+                !empty($investigator["research_group_ids"])
+                    ? array_map(
+                        "intval",
+                        explode(",", $investigator["research_group_ids"])
+                    )
+                    : [];
+        }
+
+        unset($investigator);
+
+        return $investigators;
     }
 
-    public function getOne($id, $language = "es")
-    {
+    public function getOne($identifier, $language = "es") {
         $sql = "
             SELECT
                 i.id,
@@ -81,21 +97,27 @@ class InvestigatorRepository
             INNER JOIN investigator_translations t
                 ON i.id = t.investigator_id
 
-            WHERE i.id = :id
-            AND t.language = :language
+            WHERE
+                (i.id = :id OR i.slug = :slug)
+                AND t.language = :language
 
             LIMIT 1
         ";
 
         $statement = $this->connection->prepare($sql);
 
-        $statement->bindParam(
+        $statement->bindValue(
             ":id",
-            $id,
+            is_numeric($identifier) ? (int) $identifier : 0,
             PDO::PARAM_INT
         );
 
-        $statement->bindParam(
+        $statement->bindValue(
+            ":slug",
+            $identifier
+        );
+
+        $statement->bindValue(
             ":language",
             $language
         );

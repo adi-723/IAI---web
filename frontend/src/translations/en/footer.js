@@ -1,7 +1,7 @@
 const footer = {
 
     rights:
-        "© 2026 Artificial Intelligence Institute. All rights reserved.",
+        "© 2026 High Research Institute. All rights reserved.",
 
     privacy: "Privacy Policy",
 

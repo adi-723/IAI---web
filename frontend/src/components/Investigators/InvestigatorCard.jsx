@@ -1,3 +1,4 @@
+
 import "./InvestigatorCard.css";
 
 import Card from "../UI/Card/Card";
@@ -5,32 +6,46 @@ import Button from "../UI/Button/Button";
 
 import { Link } from "react-router-dom";
 
+import { useLanguage } from "../../context/LanguageContext";
+
+import investigatorsES from "../../translations/es/investigators";
+import investigatorsEN from "../../translations/en/investigators";
+
 function InvestigatorCard({
     id,
     slug,
     name,
+    last_name,
     degree,
     area,
     image,
     summary,
     scholar
 }) {
+    const { language } = useLanguage();
+
+    const t = language === "es"
+        ? investigatorsES
+        : investigatorsEN;
+
+    const fullName = [name, last_name]
+        .filter(Boolean)
+        .join(" ");
 
     return (
-
         <Card className="investigator-card">
 
             <div className="investigator-photo">
                 <img
                     src={image}
-                    alt={name}
+                    alt={fullName}
                 />
             </div>
 
             <div className="investigator-info">
 
                 <h3>
-                    {name}
+                    {fullName}
                 </h3>
 
                 <span>
@@ -47,19 +62,21 @@ function InvestigatorCard({
 
                 <div className="investigator-buttons">
 
-                    <a
-                        href={scholar}
-                        target="_blank"
-                        rel="noreferrer"
-                    >
-                        <Button variant="secondary">
-                            Google Scholar
-                        </Button>
-                    </a>
+                    {scholar && (
+                        <a
+                            href={scholar}
+                            target="_blank"
+                            rel="noreferrer"
+                        >
+                            <Button variant="secondary">
+                                {t.scholar}
+                            </Button>
+                        </a>
+                    )}
 
                     <Link to={`/investigadores/${slug}`}>
                         <Button variant="ghost">
-                            Ver perfil →
+                            {t.profile} →
                         </Button>
                     </Link>
 
@@ -68,7 +85,6 @@ function InvestigatorCard({
             </div>
 
         </Card>
-
     );
 }
 

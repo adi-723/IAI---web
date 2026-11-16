@@ -64,19 +64,98 @@ const es = {
     },
 
     papers: {
+
         title: "Papers",
+
         description: "Gestiona las publicaciones científicas del Instituto.",
+
         add: "Agregar paper",
 
         titleColumn: "Título",
+
         researchers: "Investigadores",
+
         year: "Año",
+
         status: "Estado",
+
         actions: "Acciones",
 
         published: "Publicado",
+
         edit: "Editar",
-        delete: "Eliminar"
+
+        delete: "Eliminar",
+
+
+    // Subida de PDF
+
+        uploadDescription:
+            "Selecciona el PDF de la publicación. El sistema analizará automáticamente su información.",
+
+        pdfFile:
+            "Archivo PDF",
+
+        pdfHelp:
+            "Solo se permiten archivos PDF de hasta 20 MB.",
+
+        selectedFile:
+            "Archivo seleccionado:",
+
+        requiredPdf:
+            "Debes seleccionar un archivo PDF.",
+
+        invalidPdf:
+            "El archivo seleccionado debe ser un PDF.",
+
+        pdfTooLarge:
+            "El PDF no puede superar los 20 MB.",
+
+        upload:
+            "Subir PDF",
+
+        uploading:
+            "Subiendo PDF...",
+
+        analysisSuccess:
+            "El PDF fue analizado correctamente.",
+
+        analysisError:
+            "No se pudo analizar el PDF.",
+
+        analyzing:
+            "Analizando PDF con inteligencia artificial...",
+
+        process:
+            "Subir y analizar",
+
+        analysisResult:
+            "Información detectada",
+
+        authors:
+            "Autores",
+
+        abstract:
+            "Resumen",
+
+        keywords:
+            "Palabras clave",
+
+        journal:
+            "Revista",
+
+        date:
+            "Fecha de publicación",
+
+        doi:
+            "DOI",
+
+        notAvailable:
+            "No disponible",
+
+        cancel:
+            "Cancelar"
+
     },
 
     news: {

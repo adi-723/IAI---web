@@ -64,19 +64,68 @@ const en = {
     },
 
     papers: {
+
         title: "Papers",
+
         description: "Manage the Institute's scientific publications.",
+
         add: "Add paper",
 
         titleColumn: "Title",
+
         researchers: "Researchers",
+
         year: "Year",
+
         status: "Status",
+
         actions: "Actions",
 
         published: "Published",
+
         edit: "Edit",
-        delete: "Delete"
+
+        delete: "Delete",
+
+
+        // PDF upload
+
+        uploadDescription:
+            "Select the publication PDF. The paper information will be analyzed automatically.",
+
+        pdfFile:
+            "PDF file",
+
+        pdfHelp:
+            "Only PDF files up to 20 MB are allowed.",
+
+        selectedFile:
+            "Selected file:",
+
+        requiredPdf:
+            "You must select a PDF file.",
+
+        invalidPdf:
+            "The selected file must be a PDF.",
+
+        pdfTooLarge:
+            "The PDF cannot exceed 20 MB.",
+
+        upload:
+            "Upload PDF",
+
+        uploading:
+            "Uploading PDF...",
+
+        uploadSuccess:
+            "PDF uploaded successfully.",
+
+        uploadError:
+            "The PDF could not be uploaded.",
+
+        cancel:
+            "Cancel"
+
     },
 
     news: {
